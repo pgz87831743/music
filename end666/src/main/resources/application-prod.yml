@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:5066/basic_service
+    username: root
+    password: W9@t!W4n
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+# 开发环境配置
+server:
+  # 服务端口
+  port: 5080
+  tomcat:
+    max-http-form-post-size: 256MB
+    connection-timeout: 18000
+
+
+
+# 持久层配置
+mybatis-plus:
+  global-config:
+    db-config:
+      #主键类型
+      id-type: ASSIGN_ID
+      # 逻辑删除字段
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      # 表名前缀
+  #枚举包扫描
+  #  type-enums-package: com.wavenet.common.enums
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
