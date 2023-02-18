@@ -46,7 +46,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                     return true;
                 }
             }
-            throw new RuntimeException("认证失败");
+            throw new RuntimeException("认证失败,");
         }
     }
 }

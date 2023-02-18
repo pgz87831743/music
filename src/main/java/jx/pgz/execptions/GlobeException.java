@@ -11,11 +11,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobeException {
 
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result<String> bindException(Exception exception) {
-        exception.printStackTrace();
+    @ExceptionHandler(ResultException.class)
+    public Result<String> bindException(ResultException exception) {
+        String[] split = exception.getMessage().split("&");
+        return  Result.build(null, Integer.valueOf(split[1]),split[0]);
+    }
+
+
+    @ExceptionHandler(RuntimeException.class)
+    public Result<String> bindException(RuntimeException exception) {
         return Result.fail(exception.getMessage());
     }
+
 
 }

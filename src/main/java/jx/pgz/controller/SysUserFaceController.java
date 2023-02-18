@@ -4,18 +4,16 @@ package jx.pgz.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jx.pgz.dao.sys.entity.SysUser;
+import jx.pgz.model.dto.LoginDTO;
 import jx.pgz.security.IgnoreAuth;
 import jx.pgz.server.SysUserServiceFace;
 import jx.pgz.utils.Result;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 
-@RequestMapping("/user")
+@RequestMapping("")
 @RestController
 @Api(tags = "用户操作")
 public class SysUserFaceController {
@@ -28,8 +26,8 @@ public class SysUserFaceController {
     @PostMapping("/login")
     @ApiOperation("登录")
     @IgnoreAuth
-    public Result<SysUser> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        return Result.ok(sysUserServiceFace.login(username, password));
+    public Result<SysUser> login(@RequestBody LoginDTO loginDTO) {
+        return Result.ok(sysUserServiceFace.login(loginDTO.getUsername(), loginDTO.getPassword()),0);
     }
 
     @PostMapping("/register")

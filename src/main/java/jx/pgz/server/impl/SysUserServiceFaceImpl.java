@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import jx.pgz.config.PropertiesConfiguration;
 import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.dao.sys.service.SysUserService;
+import jx.pgz.execptions.ResultException;
 import jx.pgz.server.SysUserServiceFace;
 import jx.pgz.utils.JWTUtil;
 import jx.pgz.utils.UserContext;
@@ -26,7 +27,7 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
             user.setToken(token);
             return user;
         }
-        throw new RuntimeException("用户名或密码错误");
+        throw new ResultException("用户名或密码错误&203");
     }
 
     @Override

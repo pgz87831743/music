@@ -16,7 +16,7 @@ public class Result<T> implements Serializable {
     private T data;
 
     //操作信息
-    private String message;
+    private String msg;
 
     private Long expirationTime=UserContext.getInstance().getExpirationTime();
 
@@ -27,6 +27,9 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> ok(T data,String msg) {
         return build(data, 200,msg);
+    }
+    public static <T> Result<T> ok(T data,int code) {
+        return build(data, code,ResultCodeEnum.SUCCESS.getMessage());
     }
 
     public static <T> Result<T> ok() {
@@ -46,7 +49,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> build(T data, ResultCodeEnum resultCodeEnum) {
         Result<T> result = new Result<>();
         result.setData(data);
-        result.setMessage(resultCodeEnum.getMessage());
+        result.setMsg(resultCodeEnum.getMessage());
         result.setCode(resultCodeEnum.getCode());
         return result;
     }
@@ -54,7 +57,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> build(T data, Integer code, String message) {
         Result<T> result = new Result<>();
         result.setData(data);
-        result.setMessage(message);
+        result.setMsg(message);
         result.setCode(code);
         return result;
     }

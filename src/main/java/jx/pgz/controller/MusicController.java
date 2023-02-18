@@ -4,6 +4,7 @@ package jx.pgz.controller;
 import io.swagger.annotations.Api;
 import jx.pgz.dao.sys.entity.Music;
 import jx.pgz.dao.sys.service.MusicService;
+import jx.pgz.security.IgnoreAuth;
 import jx.pgz.utils.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +20,14 @@ public class MusicController {
     private MusicService musicService;
 
     @GetMapping("/getlist")
+    @IgnoreAuth
     public Result<List<Music>> getlist(){
         return Result.ok(musicService.list());
     }
 
 
     @PutMapping("/update")
+    @IgnoreAuth
     public Result<String> getlist(@RequestBody List<Music> musics){
         musicService.updateBatchById(musics);
         return Result.ok(null,"操作成功");
