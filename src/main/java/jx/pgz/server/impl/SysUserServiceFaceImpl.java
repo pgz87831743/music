@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import jx.pgz.config.PropertiesConfiguration;
 import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.dao.sys.service.SysUserService;
+import jx.pgz.execptions.MyRuntimeException;
 import jx.pgz.server.SysUserServiceFace;
 import jx.pgz.utils.JWTUtil;
 import jx.pgz.utils.UserContext;
@@ -24,9 +25,11 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
         if (user != null) {
             String token = JWTUtil.createToken(user.getId(), user.getUsername(), propertiesConfiguration.getTokenKey(), propertiesConfiguration.getExpireMinutes());
             user.setToken(token);
+            Claims claims = JWTUtil.parseToken(token, propertiesConfiguration.getTokenKey());
+            UserContext.getInstance().setContext(claims);
             return user;
         }
-        throw new RuntimeException("用户名或密码错误");
+        throw new MyRuntimeException("用户名或密码错误");
     }
 
     @Override

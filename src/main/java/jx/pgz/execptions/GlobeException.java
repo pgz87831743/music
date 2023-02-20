@@ -1,5 +1,6 @@
 package jx.pgz.execptions;
 
+import jx.pgz.enums.ResultCodeEnum;
 import jx.pgz.utils.Result;
 
 import org.springframework.http.HttpStatus;
@@ -12,10 +13,16 @@ public class GlobeException {
 
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result<String> bindException(Exception exception) {
+    public Result<Object> bindException(Exception exception) {
         exception.printStackTrace();
         return Result.fail(exception.getMessage());
+    }
+
+
+    @ExceptionHandler(MyRuntimeException.class)
+    public Result<Object> bindException(MyRuntimeException exception) {
+        exception.printStackTrace();
+        return Result.fail(exception.getMsg(), exception.getCode() == 0 ? ResultCodeEnum.FAIL.getCode() : exception.getCode()).setShowMsg(true).setSuccess(false);
     }
 
 }
