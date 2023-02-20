@@ -2,6 +2,7 @@ package jx.pgz.security;
 
 import io.jsonwebtoken.Claims;
 import jx.pgz.config.PropertiesConfiguration;
+import jx.pgz.execptions.MyRuntimeException;
 import jx.pgz.utils.JWTUtil;
 import jx.pgz.utils.UserContext;
 import org.springframework.stereotype.Component;
@@ -46,7 +47,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                     return true;
                 }
             }
-            throw new RuntimeException("认证失败");
+            throw new MyRuntimeException("认证失败重新登录");
         }
     }
 }

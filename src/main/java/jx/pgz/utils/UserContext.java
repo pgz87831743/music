@@ -61,9 +61,9 @@ public class UserContext {
      *
      * @return
      */
-    public String getUserId() {
+    public Long getUserId() {
         if (getContext() != null) {
-            return (String) getContext().get("userId");
+            return Long.valueOf((Integer) getContext().get("userId")) ;
         }
         return null;
     }

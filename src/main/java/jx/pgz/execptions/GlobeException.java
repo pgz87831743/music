@@ -18,6 +18,12 @@ public class GlobeException {
         return Result.fail(exception.getMessage());
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public Result<Object> bindException(RuntimeException exception) {
+        exception.printStackTrace();
+        return Result.fail(exception.getMessage());
+    }
+
 
     @ExceptionHandler(MyRuntimeException.class)
     public Result<Object> bindException(MyRuntimeException exception) {

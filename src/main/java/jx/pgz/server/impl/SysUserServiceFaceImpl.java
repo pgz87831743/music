@@ -36,7 +36,7 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
     public SysUser register(String username, String password) {
         SysUser user = sysUserService.lambdaQuery().eq(SysUser::getUsername, username).one();
         if (user != null) {
-            throw new RuntimeException("用户已存在");
+            throw new MyRuntimeException("用户已存在");
         }
         SysUser newUser = SysUser.builder().username(username).password(password).build();
         sysUserService.save(newUser);
@@ -47,7 +47,7 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
     public SysUser refreshToken(String token) {
         Claims claims = JWTUtil.parseToken(token, propertiesConfiguration.getTokenKey());
         if (claims == null) {
-            throw new RuntimeException("token 异常");
+            throw new MyRuntimeException("token 异常");
         }
         Long userId = Long.valueOf(claims.get("userId")+"") ;
         SysUser user = sysUserService.getById(userId);

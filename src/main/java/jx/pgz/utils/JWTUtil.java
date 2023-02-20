@@ -43,6 +43,7 @@ public class JWTUtil {
                     .setSigningKey(DatatypeConverter.parseBase64Binary(key))
                     .parseClaimsJws(token).getBody();
         } catch (Exception ex) {
+            ex.printStackTrace();
             return null;
         }
     }
@@ -63,7 +64,7 @@ public class JWTUtil {
         //添加构成JWT的参数
         Date date = new Date(System.currentTimeMillis() + Duration.between(LocalDateTime.now(), LocalDateTime.now().plusMinutes(expireMinutes)).toMillis());
         JwtBuilder builder = Jwts.builder()
-                .claim("userId", userId) // 设置载荷信息
+                .claim("userId",userId) // 设置载荷信息
                 .claim("username",username)
                 .claim("expirationTime",date.getTime())
                 .setExpiration(date)// 设置超时时间

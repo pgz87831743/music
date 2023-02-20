@@ -33,8 +33,8 @@ public class SysUserFaceController {
     @PostMapping("/register")
     @ApiOperation("注册")
     @IgnoreAuth
-    public Result<SysUser> register(@RequestParam("username") String username, @RequestParam("password") String password) {
-        return Result.ok(sysUserServiceFace.register(username, password));
+    public Result<SysUser> register(@RequestBody LoginDTO loginDTO) {
+        return Result.ok(sysUserServiceFace.register(loginDTO.getUsername(), loginDTO.getPassword())).setMsg("注册成功").setShowMsg(true);
     }
 
     @PostMapping("/refreshToken")

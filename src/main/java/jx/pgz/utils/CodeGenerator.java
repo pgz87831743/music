@@ -26,7 +26,7 @@ public class CodeGenerator {
         String driverName = "com.mysql.cj.jdbc.Driver";
         String username ="root";
         String password = "123456";
-        String[] table = new String[]{"music"};
+        String[] table = new String[]{"pet_file","daily_record"};
 
 
         // 代码生成器
@@ -52,7 +52,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("sys");
+        pc.setModuleName("yw");
         pc.setParent("jx.pgz.dao");
         mpg.setPackageInfo(pc);
 

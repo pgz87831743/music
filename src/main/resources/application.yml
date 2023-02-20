@@ -42,7 +42,7 @@ attachment:
 
 music:
   tokenKey: admin
-  expireMinutes: 30
+  expireMinutes: 300000
   ignoreUrl:
     - /login
     - /doc.html
