@@ -10,4 +10,7 @@ public interface SysUserServiceFace {
 
     SysUser refreshToken(String token);
 
+    SysUser getCurrentUser(Long userId);
+
+    boolean updateUser(SysUser sysUser);
 }

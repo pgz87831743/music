@@ -12,6 +12,8 @@ import jx.pgz.utils.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/dailyRecord")
 @RestController
 @Api(tags = "每日记录")
@@ -19,14 +21,11 @@ import org.springframework.web.bind.annotation.*;
 public class DailyRecordController {
 
     private final DailyRecordService dailyRecordService;
+    private final PetFileService petFileService;
 
     @PostMapping("/page")
     public Result<Page<DailyRecord>> page(@RequestBody PageDTO pageDTO) {
-        Page<DailyRecord> page = dailyRecordService
-                .lambdaQuery()
-                .eq(DailyRecord::getCreateBy, UserContext.getInstance().getUserId())
-                .page(pageDTO.getMybatisPage());
-        return Result.ok(page);
+        return Result.ok(dailyRecordService.page(pageDTO));
     }
 
 
@@ -38,7 +37,7 @@ public class DailyRecordController {
 
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody DailyRecord dailyRecord) {
-        return Result.ok(dailyRecordService.saveOrUpdate(dailyRecord)).setShowMsg(true).setMsg("操作成功");
+        return Result.ok(dailyRecordService.saveDailyRecord(dailyRecord)).setShowMsg(true).setMsg("操作成功");
     }
 
 
@@ -50,5 +49,10 @@ public class DailyRecordController {
     @GetMapping("/getById/{id}")
     public Result<DailyRecord> getById(@PathVariable("id") Long id) {
         return Result.ok(dailyRecordService.getById(id));
+    }
+
+    @GetMapping("/allPet")
+    public Result<List<PetFile>> allPet() {
+        return Result.ok(petFileService.lambdaQuery().eq(PetFile::getCreateBy,UserContext.getInstance().getUserId()).list());
     }
 }

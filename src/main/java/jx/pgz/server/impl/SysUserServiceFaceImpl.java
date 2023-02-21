@@ -57,4 +57,14 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
         UserContext.getInstance().setContext(newClaims);
         return user;
     }
+
+    @Override
+    public SysUser getCurrentUser(Long userId) {
+        return sysUserService.getById(userId);
+    }
+
+    @Override
+    public boolean updateUser(SysUser sysUser) {
+        return sysUserService.updateById(sysUser);
+    }
 }

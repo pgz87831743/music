@@ -19,55 +19,40 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class DailyRecord implements Serializable {
+public class FeedingSkills implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 主键
+     */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 宠物ID
+     * 姓名
      */
-    private Long petId;
-
-    @TableField(exist = false)
-    private PetFile petFile;
+    private String xm;
 
     /**
-     * 喂食量
+     * 种类
      */
-    private Float wsl;
+    private String zl;
 
     /**
-     * 饮水量（推荐饮水量为体重的千克数乘六十，单位为毫升）
+     * 饮食
      */
-    private Float ysl;
+    private String ys;
 
     /**
-     * 刷牙（是或否）
+     * 行为
      */
-    private String sy;
+    private String xw;
 
     /**
-     * 排便（是否正常）
+     * 宠物用品
      */
-    private String pb;
-
-    /**
-     * 体重（今日是否变化，如有变化为多少）
-     */
-    private Float tz;
-
-    /**
-     * 活动量（大，中，小）
-     */
-    private String hdl;
-
-    /**
-     * 驱虫（是或否，如果距离上次驱虫时间小于一个月则发出驱虫频繁预警）
-     */
-    private String qc;
+    private String cwyp;
 
     /**
      * 创建人

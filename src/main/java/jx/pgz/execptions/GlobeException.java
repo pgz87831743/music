@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobeException {
 
 
+
+    @ExceptionHandler(Throwable.class)
+    public Result<Object> bindException(Throwable exception) {
+        exception.printStackTrace();
+        return Result.fail(exception.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public Result<Object> bindException(Exception exception) {
         exception.printStackTrace();
@@ -21,7 +28,7 @@ public class GlobeException {
     @ExceptionHandler(RuntimeException.class)
     public Result<Object> bindException(RuntimeException exception) {
         exception.printStackTrace();
-        return Result.fail(exception.getMessage());
+        return Result.fail().setShowMsg(true);
     }
 
 

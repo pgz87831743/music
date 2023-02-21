@@ -8,6 +8,7 @@ import jx.pgz.model.dto.LoginDTO;
 import jx.pgz.security.IgnoreAuth;
 import jx.pgz.server.SysUserServiceFace;
 import jx.pgz.utils.Result;
+import jx.pgz.utils.UserContext;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,6 +42,19 @@ public class SysUserFaceController {
     @ApiOperation("刷新token")
     public Result<SysUser> refreshToken(@RequestParam("token") String token) {
         return Result.ok(sysUserServiceFace.refreshToken(token));
+    }
+
+
+    @PostMapping("/getCurrenUser")
+    @ApiOperation("获取user")
+    public Result<SysUser> getCurrenUser() {
+        return Result.ok(sysUserServiceFace.getCurrentUser(UserContext.getInstance().getUserId()));
+    }
+
+    @PostMapping("/updateUser")
+    @ApiOperation("获取user")
+    public Result<Boolean> updateUser(@RequestBody SysUser sysUser) {
+        return Result.ok(sysUserServiceFace.updateUser(sysUser));
     }
 
 

@@ -1,10 +1,4 @@
-<el-table-column prop="create_by" label="创建人"/>
-<el-table-column prop="gwbs" label="过往病史（填写文字）"/>
-<el-table-column prop="id" label=""/>
-<el-table-column prop="jy" label="绝育情况（是否）"/>
-<el-table-column prop="nl" label="年龄"/>
-<el-table-column prop="qz" label="体重（kg）"/>
-<el-table-column prop="update_time" label="创建时间"/>
-<el-table-column prop="xm" label="姓名"/>
-<el-table-column prop="ymqk" label="疫苗情况（未免疫，未完全免疫，已完全免疫）"/>
-<el-table-column prop="zl" label="种类（猫或狗就可以）"/>
+<el-table-column prop="create_time" label="创建时间"/>
+<el-table-column prop="pet_id" label="宠物ID"/>
+<el-table-column prop="recommend" label="参考策略"/>
+<el-table-column prop="type" label="监测类型"/>
