@@ -10,6 +10,7 @@ import jx.pgz.utils.JWTUtil;
 import jx.pgz.utils.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,9 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
 
     @Override
     public SysUser register(String username, String password) {
+        if (!StringUtils.hasText(username)||!StringUtils.hasText(password)){
+            throw new MyRuntimeException("请填写完整用户名或密码");
+        }
         SysUser user = sysUserService.lambdaQuery().eq(SysUser::getUsername, username).one();
         if (user != null) {
             throw new MyRuntimeException("用户已存在");

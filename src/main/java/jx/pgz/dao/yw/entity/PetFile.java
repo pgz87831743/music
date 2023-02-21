@@ -52,6 +52,16 @@ public class PetFile implements Serializable {
     private String jy;
 
     /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 身长
+     */
+    private Float sc;
+
+    /**
      * 疫苗情况（未免疫，未完全免疫，已完全免疫）
      */
     private String ymqk;
