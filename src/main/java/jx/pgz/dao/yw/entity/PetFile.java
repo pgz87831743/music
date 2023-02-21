@@ -70,8 +70,8 @@ public class PetFile implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
 
 }
