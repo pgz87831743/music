@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,7 +17,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 
- * @since 2023-02-20
+ * @since 2023-02-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -30,29 +32,19 @@ public class FeedingSkills implements Serializable {
     private Long id;
 
     /**
-     * 姓名
+     * 标题
      */
-    private String xm;
+    private String title;
 
     /**
-     * 种类
+     * 浏览次数
      */
-    private String zl;
+    private Integer times;
 
     /**
-     * 饮食
+     * 正文
      */
-    private String ys;
-
-    /**
-     * 行为
-     */
-    private String xw;
-
-    /**
-     * 宠物用品
-     */
-    private String cwyp;
+    private String content;
 
     /**
      * 创建人
@@ -64,6 +56,7 @@ public class FeedingSkills implements Serializable {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
 

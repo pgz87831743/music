@@ -18,13 +18,11 @@ create table basic_service.feeding_skills
 (
     id          bigint auto_increment comment '主键'
         primary key,
-    xm          varchar(255) null comment '姓名',
-    zl          varchar(255) null comment '种类',
-    ys          varchar(500) null comment '饮食',
-    xw          varchar(500) null comment '行为',
-    cwyp        varchar(500) null comment '宠物用品',
-    create_by   bigint       null comment '创建人',
-    create_time datetime     null comment '创建时间'
+    title       varchar(255)     null comment '标题',
+    times       bigint default 0 null comment '浏览次数',
+    content     text             not null comment '正文',
+    create_by   bigint           null comment '创建人',
+    create_time datetime         null comment '创建时间'
 );
 
 create table basic_service.health_monitoring

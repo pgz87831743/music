@@ -26,7 +26,7 @@ public class CodeGenerator {
         String driverName = "com.mysql.cj.jdbc.Driver";
         String username ="root";
         String password = "123456";
-        String[] table = new String[]{"health_monitoring"};
+        String[] table = new String[]{"feeding_skills"};
 
 
 
