@@ -46,6 +46,13 @@ public class FeedingSkills implements Serializable {
      */
     private String content;
 
+
+    /**
+     * 正文
+     */
+    private String lx;
+
+
     /**
      * 创建人
      */

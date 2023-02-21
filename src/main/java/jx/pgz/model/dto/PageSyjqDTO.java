@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class PageSyjqDTO extends PageDTO{
 
     private String search;
+    private String lx;
 
 
 

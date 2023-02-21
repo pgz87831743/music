@@ -26,6 +26,8 @@ public class FeedingSkillsController {
         Page<FeedingSkills> page = feedingSkillsService
                 .lambdaQuery()
                 .like(StringUtils.hasText(pageDTO.getSearch()),FeedingSkills::getTitle,pageDTO.getSearch())
+                .or()
+                .like(StringUtils.hasText(pageDTO.getLx()),FeedingSkills::getLx,pageDTO.getLx())
                 .page(pageDTO.getMybatisPage());
         return Result.ok(page);
     }
