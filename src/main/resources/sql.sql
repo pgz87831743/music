@@ -49,6 +49,8 @@ create table basic_service.pet_file
     jy          varchar(255) null comment '绝育情况（是否）',
     ymqk        varchar(64)  null comment '疫苗情况（未免疫，未完全免疫，已完全免疫）',
     gwbs        varchar(255) null comment '过往病史（填写文字）',
+    sex         varchar(10)  null comment '性别',
+    sc          float        null comment '身长',
     create_by   bigint       null comment '创建人',
     create_time datetime     null comment '创建时间'
 );
