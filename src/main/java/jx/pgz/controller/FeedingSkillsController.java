@@ -66,7 +66,7 @@ public class FeedingSkillsController {
 
     @GetMapping("/check/{id}")
     public Result<Boolean> check(@PathVariable("id") Long id) {
-        FeedingSkills one = feedingSkillsService.lambdaQuery().select(FeedingSkills::getId,FeedingSkills::getTimes).eq(FeedingSkills::getId, 8).one();
+        FeedingSkills one = feedingSkillsService.lambdaQuery().select(FeedingSkills::getId,FeedingSkills::getTimes).eq(FeedingSkills::getId, id).one();
        one.setTimes(one.getTimes()+1);
         return Result.ok(feedingSkillsService.lambdaUpdate().eq(FeedingSkills::getId,id).set(FeedingSkills::getTimes,one.getTimes()).update());
     }

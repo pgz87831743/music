@@ -17,14 +17,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-/**
- * @ClassName: JwtHelper
- * @Description: token工具类
- * @author: whq
- * @date: 2018/8/17 9:59
- * @version: V 2.0.0
- * @since: (jdk_1.8)
- */
+
 public class JWTUtil {
 
 
