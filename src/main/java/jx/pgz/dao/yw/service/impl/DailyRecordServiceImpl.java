@@ -17,9 +17,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,56 +82,88 @@ public class DailyRecordServiceImpl extends ServiceImpl<DailyRecordMapper, Daily
             tjws = tjys * 2.5;
         }
 
-        String dataStr = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
         List<HealthMonitoring> list = new ArrayList<>();
 
         //we
         if (wsl < (tjws*0.2)) {
-            HealthMonitoring healthMonitoring = new HealthMonitoring();
-            healthMonitoring.setType("喂食量");
-            healthMonitoring.setPetId(petId);
-            healthMonitoring.setPetName(petFile.getXm());
-            healthMonitoring.setDataStr(dataStr);
-            healthMonitoring.setRecommend("您的宠物" + petFile.getXm() + "喂食量较低，推荐喂食量为：" + tjws + ",当前值为" + wsl);
-            list.add(healthMonitoring);
+            obj(list,petFile,"喂食量过少请减少喂食量至（标准值）"+tjws+"kcal左右");
         } else if (wsl > (tjws*1.2)) {
-            HealthMonitoring healthMonitoring = new HealthMonitoring();
-            healthMonitoring.setType("喂食量");
-            healthMonitoring.setPetId(petId);
-            healthMonitoring.setPetName(petFile.getXm());
-            healthMonitoring.setDataStr(dataStr);
-            healthMonitoring.setRecommend("您的宠物" + petFile.getXm() + "喂食量较高，推荐喂食量为：" + tjws + ",当前值为" + wsl);
-            list.add(healthMonitoring);
+            obj(list,petFile,"喂食量过多请增加喂食量至（标准值）"+tjws+"kcal左右");
         }
 
 
         if (ysl < (tjys*0.5)) {
-            HealthMonitoring healthMonitoring = new HealthMonitoring();
-            healthMonitoring.setType("饮水量");
-            healthMonitoring.setPetId(petId);
-            healthMonitoring.setPetName(petFile.getXm());
-            healthMonitoring.setDataStr(dataStr);
-            healthMonitoring.setRecommend("您的宠物" + petFile.getXm() + "饮水量较低，推荐饮水量为：" + tjys + ",当前值为" + ysl);
-            list.add(healthMonitoring);
+            obj(list,petFile,"饮水量过少，可能是疾病信号，推荐饮水量为（标准值）"+tjys+"ml");
         } else if (ysl > (tjys*1.5)) {
-            HealthMonitoring healthMonitoring = new HealthMonitoring();
-            healthMonitoring.setType("饮水量");
-            healthMonitoring.setPetId(petId);
-            healthMonitoring.setPetName(petFile.getXm());
-            healthMonitoring.setDataStr(dataStr);
-            healthMonitoring.setRecommend("您的宠物" + petFile.getXm() + "饮水量较高，推荐饮水量为：" + tjys + ",当前值为" + ysl);
-            list.add(healthMonitoring);
+            obj(list,petFile,"饮水量过多，可能是疾病信号，推荐饮水量为（标准值）"+tjys+"ml");
         }
 
+
+
+
+        List<DailyRecord> oldList = lambdaQuery().eq(DailyRecord::getPetId, petId)
+                .orderByDesc(true, DailyRecord::getCreateTime)
+                .last("limit 0,2").list();
+
+        oldList.add(0,dailyRecord);
+        boolean qcBoolean=true;
+        int pxNum=0;
+        int hdNum=0;
+        for (DailyRecord record : oldList) {
+            if ("小".equals(record.getHdl())){
+                hdNum+=1;
+            }
+            if ("否".equals(record.getPb())){
+                pxNum+=1;
+            }
+
+        }
+        if (pxNum>=3){
+            obj(list,petFile,"可能有泌尿或肠冒疾病，推荐内容为：请带您的宠物进行就医");
+        }
+        if (hdNum>=3){
+            obj(list,petFile,"宠物活跃度过低，系统推荐里生成一条推荐(请陪伴并促进您的宠物多加活动)");
+        }
+        if ("是".equals(oldList.get(0).getQc())){
+            if (oldList.get(1)!=null){
+                long l = Duration.between(LocalDateTime.now(), oldList.get(1).getCreateTime()).toDays();
+                if (l>30){
+                    obj(list,petFile,"驱虫过于频繁，推荐内容为：驱虫时间请最少间隔一个月");
+                }
+            }
+        }
+
+
+
         dailyRecord.setPetName(petFile.getXm());
-        dailyRecord.setDataStr(dataStr);
+        dailyRecord.setDataStr(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         boolean b = saveOrUpdate(dailyRecord);
+
+
+
         if (list.size() > 0) {
             return healthMonitoringService.saveBatch(list);
         }
 
         return false;
+    }
+
+    public HealthMonitoring obj(List<HealthMonitoring> list,PetFile petFile,String recommend){
+        HealthMonitoring healthMonitoring = new HealthMonitoring();
+        healthMonitoring.setPetId(petFile.getId());
+        healthMonitoring.setPetName(petFile.getXm());
+        healthMonitoring.setDataStr(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        healthMonitoring.setRecommend(recommend);
+        list.add(healthMonitoring);
+        return healthMonitoring;
+    }
+
+
+    public static void main(String[] args) {
+
+
+        System.out.println(Duration.between(LocalDateTime.now(), LocalDateTime.now().plusDays(6)).toDays());
+
     }
 
 }

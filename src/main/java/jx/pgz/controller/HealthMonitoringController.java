@@ -5,9 +5,11 @@ import io.swagger.annotations.Api;
 import jx.pgz.dao.yw.entity.HealthMonitoring;
 import jx.pgz.dao.yw.service.HealthMonitoringService;
 import jx.pgz.model.dto.PageDTO;
+import jx.pgz.model.dto.PageJkjcDTO;
 import jx.pgz.utils.Result;
 import jx.pgz.utils.UserContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/healthMonitoring")
@@ -19,9 +21,11 @@ public class HealthMonitoringController {
     private final HealthMonitoringService healthMonitoringService;
 
     @PostMapping("/page")
-    public Result<Page<HealthMonitoring>> page(@RequestBody PageDTO pageDTO) {
+    public Result<Page<HealthMonitoring>> page(@RequestBody PageJkjcDTO pageDTO) {
         Page<HealthMonitoring> page = healthMonitoringService
                 .lambdaQuery()
+                .eq(StringUtils.hasText(pageDTO.getDataStr()),HealthMonitoring::getDataStr,pageDTO.getDataStr())
+                .like(StringUtils.hasText(pageDTO.getName()),HealthMonitoring::getPetName,pageDTO.getName())
                 .eq(HealthMonitoring::getCreateBy, UserContext.getInstance().getUserId())
                 .page(pageDTO.getMybatisPage());
         return Result.ok(page);

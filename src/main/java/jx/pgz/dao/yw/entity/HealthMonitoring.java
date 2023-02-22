@@ -8,8 +8,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -21,6 +24,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = true)
 public class HealthMonitoring implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,10 +43,7 @@ public class HealthMonitoring implements Serializable {
      */
     private Long petId;
 
-    /**
-     * 监测类型
-     */
-    private String type;
+
 
     /**
      * 参考策略
