@@ -35,9 +35,9 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 attachment:
-  rootPath: D:\dd\
+  rootPath: C:\dd\
   accessPath: /attachment/**
-  api: http://localhost:8081/attachment/
+  api: http://localhost:9001/attachment/
 
 
 music:

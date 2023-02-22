@@ -1,9 +1,17 @@
 package jx.pgz.enums;
 
 public enum FileTypeEnum {
-    FILE("文件"),
-    MUSIC("文件");
+    RUNNING("RUNNING文件"),
+    POSITION("POSITION文件"),
+    ;
+
+    private final String type;
 
     FileTypeEnum(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 }

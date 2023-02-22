@@ -27,7 +27,7 @@ public class Result<T> implements Serializable {
     private boolean showMsg=false;
     private boolean success=true;
 
-    private Long expirationTime = UserContext.getInstance().getExpirationTime();
+
 
 
     public static <T> Result<T> ok(T data) {

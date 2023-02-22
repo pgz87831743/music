@@ -1,8 +1,14 @@
 package jx.pgz.server.impl;
 
 
+import cn.afterturn.easypoi.csv.CsvImportUtil;
+import cn.afterturn.easypoi.csv.entity.CsvImportParams;
 import jx.pgz.dao.sys.entity.SysFile;
 import jx.pgz.dao.sys.service.SysFileService;
+import jx.pgz.dao.yw.entity.Position;
+import jx.pgz.dao.yw.entity.Running;
+import jx.pgz.dao.yw.service.PositionService;
+import jx.pgz.dao.yw.service.RunningService;
 import jx.pgz.enums.FileTypeEnum;
 import jx.pgz.server.FilesServiceFace;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,6 +22,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +33,27 @@ import java.util.Objects;
 public class FilesServiceFaceImpl implements FilesServiceFace, InitializingBean {
 
     @Resource
-    SysFileService filesService;
+    private SysFileService filesService;
 
 
     @Value("${attachment.rootPath}")
-    public String filePath;
+    private String filePath;
 
     @Value("${attachment.accessPath}")
-    public String accessPath;
+    private String accessPath;
 
     @Value("${attachment.api}")
-    public String accessApi;
+    private String accessApi;
 
     @Resource
-    HttpServletResponse response;
+    private HttpServletResponse response;
+
+
+    @Resource
+    private PositionService positionService;
+
+    @Resource
+    private RunningService runningService;
 
 
     @Override
@@ -59,8 +74,9 @@ public class FilesServiceFaceImpl implements FilesServiceFace, InitializingBean 
                 throw new RuntimeException("文件上传失败");
             }
 
-            try (OutputStream out = new FileOutputStream(filePath + fileSource.getPath())) {
+            try (OutputStream out = Files.newOutputStream(Paths.get(filePath + fileSource.getPath()))) {
                 FileCopyUtils.copy(file.getInputStream(), out);
+                fileHandler(Paths.get(filePath + fileSource.getPath()).toFile(), fileTypeEnum);
             } catch (Exception e) {
                 throw new RuntimeException("文件保存失败");
             }
@@ -115,6 +131,28 @@ public class FilesServiceFaceImpl implements FilesServiceFace, InitializingBean 
         }
         return false;
     }
+
+
+    public void fileHandler(File file, FileTypeEnum fileTypeEnum) {
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            CsvImportParams csvImportParams = new CsvImportParams();
+            if (FileTypeEnum.POSITION.equals(fileTypeEnum)) {
+                List<Position> objects = CsvImportUtil.importCsv(fileInputStream, Position.class, csvImportParams);
+                positionService.saveOrUpdateBatch(objects);
+            }
+
+            if (FileTypeEnum.RUNNING.equals(fileTypeEnum)) {
+                List<Running> objects = CsvImportUtil.importCsv(fileInputStream, Running.class, csvImportParams);
+                runningService.saveOrUpdateBatch(objects);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        // File
+    }
+
 
     @Override
     public void afterPropertiesSet() throws Exception {
