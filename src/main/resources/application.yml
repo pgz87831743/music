@@ -38,17 +38,3 @@ attachment:
   rootPath: C:\dd\
   accessPath: /attachment/**
   api: http://localhost:9001/attachment/
-
-
-music:
-  tokenKey: admin
-  expireMinutes: 300000
-  ignoreUrl:
-    - /login
-    - /doc.html
-    - /webjars/**
-    - /js/**
-    - /css/**
-    - /swagger-resources
-    - /v2/api-docs
-
