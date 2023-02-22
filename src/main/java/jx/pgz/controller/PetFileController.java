@@ -4,11 +4,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import jx.pgz.dao.yw.entity.PetFile;
 import jx.pgz.dao.yw.service.PetFileService;
+import jx.pgz.model.dto.PageCwdaDTO;
 import jx.pgz.model.dto.PageDTO;
 import jx.pgz.utils.Result;
 import jx.pgz.utils.UserContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RequestMapping("/petFile")
 @RestController
@@ -19,9 +23,10 @@ public class PetFileController {
     private final PetFileService petFileService;
 
     @PostMapping("/page")
-    public Result<Page<PetFile>> page(@RequestBody PageDTO pageDTO) {
+    public Result<Page<PetFile>> page(@RequestBody PageCwdaDTO pageDTO) {
         Page<PetFile> page = petFileService
                 .lambdaQuery()
+                .like(StringUtils.hasText(pageDTO.getName()),PetFile::getXm,pageDTO.getName())
                 .eq(PetFile::getCreateBy, UserContext.getInstance().getUserId())
                 .page(pageDTO.getMybatisPage());
         return Result.ok(page);
@@ -36,6 +41,7 @@ public class PetFileController {
 
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody PetFile petFile) {
+        petFile.setNl((float) (petFile.getN()*12+petFile.getY()));
         return Result.ok(petFileService.saveOrUpdate(petFile)).setShowMsg(true).setMsg("操作成功");
     }
 

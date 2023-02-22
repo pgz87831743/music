@@ -34,15 +34,20 @@ public class DailyRecord implements Serializable {
     @TableField(exist = false)
     private PetFile petFile;
 
+
+    private String dataStr;
+
+    private String petName;
+
     /**
      * 喂食量
      */
-    private Float wsl;
+    private Double wsl;
 
     /**
      * 饮水量（推荐饮水量为体重的千克数乘六十，单位为毫升）
      */
-    private Float ysl;
+    private Double ysl;
 
     /**
      * 刷牙（是或否）
@@ -57,7 +62,7 @@ public class DailyRecord implements Serializable {
     /**
      * 体重（今日是否变化，如有变化为多少）
      */
-    private Float tz;
+    private Double tz;
 
     /**
      * 活动量（大，中，小）

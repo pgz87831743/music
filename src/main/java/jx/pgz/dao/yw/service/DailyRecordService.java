@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jx.pgz.dao.yw.entity.DailyRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jx.pgz.model.dto.PageDTO;
+import jx.pgz.model.dto.PageMrjlDTO;
 
 /**
  * <p>
@@ -17,7 +18,7 @@ public interface DailyRecordService extends IService<DailyRecord> {
 
 
 
-    Page<DailyRecord> page(PageDTO pageDTO);
+    Page<DailyRecord> page(PageMrjlDTO pageDTO);
 
 
     boolean saveDailyRecord(DailyRecord dailyRecord);

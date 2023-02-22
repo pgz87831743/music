@@ -7,6 +7,7 @@ import jx.pgz.dao.yw.entity.PetFile;
 import jx.pgz.dao.yw.service.DailyRecordService;
 import jx.pgz.dao.yw.service.PetFileService;
 import jx.pgz.model.dto.PageDTO;
+import jx.pgz.model.dto.PageMrjlDTO;
 import jx.pgz.utils.Result;
 import jx.pgz.utils.UserContext;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class DailyRecordController {
     private final PetFileService petFileService;
 
     @PostMapping("/page")
-    public Result<Page<DailyRecord>> page(@RequestBody PageDTO pageDTO) {
+    public Result<Page<DailyRecord>> page(@RequestBody PageMrjlDTO pageDTO) {
         return Result.ok(dailyRecordService.page(pageDTO));
     }
 

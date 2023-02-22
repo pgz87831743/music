@@ -28,6 +28,10 @@ public class HealthMonitoring implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    private String dataStr;
+
+    private String petName;
+
     /**
      * 宠物ID
      */

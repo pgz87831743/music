@@ -1,20 +1,21 @@
 package jx.pgz.dao.yw.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author 
+ * @author
  * @since 2023-02-20
  */
 @Data
@@ -44,7 +45,11 @@ public class PetFile implements Serializable {
     /**
      * 体重（kg）
      */
-    private Float qz;
+    private Double tz;
+
+
+    private Integer n;
+    private Integer y;
 
     /**
      * 绝育情况（是否）
@@ -59,7 +64,7 @@ public class PetFile implements Serializable {
     /**
      * 身长
      */
-    private Float sc;
+    private Double sc;
 
     /**
      * 疫苗情况（未免疫，未完全免疫，已完全免疫）
