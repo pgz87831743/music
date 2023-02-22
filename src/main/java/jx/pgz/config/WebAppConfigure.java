@@ -23,8 +23,6 @@ public class WebAppConfigure implements WebMvcConfigurer {
     public String accessPath;
 
 
-    @Resource
-    private PropertiesConfiguration propertiesConfiguration;
 
     /**
      * 配置静态资源访问
