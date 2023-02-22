@@ -45,7 +45,7 @@ public class PositionController {
     }
 
 
-    @GetMapping("page")
+    @PostMapping("page")
     @ApiOperation("position分页数据")
     public Result<Page<Position>> page(@RequestBody PageDTO pageDTO) {
         return Result.ok(positionService.page(pageDTO.getMybatisPage()));

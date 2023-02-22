@@ -49,7 +49,7 @@ public class RunningController {
     }
 
 
-    @GetMapping("page")
+    @PostMapping("page")
     @ApiOperation("running分页数据")
     public Result<Page<Running>> page(@RequestBody PageDTO pageDTO) {
         return Result.ok(runningService.page(pageDTO.getMybatisPage()));
