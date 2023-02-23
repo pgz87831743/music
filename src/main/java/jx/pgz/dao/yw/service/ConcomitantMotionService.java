@@ -1,7 +1,10 @@
 package jx.pgz.dao.yw.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jx.pgz.dao.yw.entity.ConcomitantMotion;
 import com.baomidou.mybatisplus.extension.service.IService;
+import jx.pgz.dao.yw.entity.MessageManagement;
+import jx.pgz.model.dto.PageDTO;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ import java.util.List;
 public interface ConcomitantMotionService extends IService<ConcomitantMotion> {
 
     List<ConcomitantMotion> listQuery();
+
+
+    Page<ConcomitantMotion> pageQuery(PageDTO pageDTO);
 
     /**
      * 报名运动

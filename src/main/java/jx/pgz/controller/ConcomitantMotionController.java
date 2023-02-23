@@ -28,7 +28,7 @@ public class ConcomitantMotionController {
 
     @PostMapping("page")
     public Result<Page<ConcomitantMotion>> page(@RequestBody PageDTO pageDTO) {
-        return Result.ok(concomitantMotionService.page(pageDTO.getMybatisPage()));
+        return Result.ok(concomitantMotionService.pageQuery(pageDTO));
     }
 
     @GetMapping("list")

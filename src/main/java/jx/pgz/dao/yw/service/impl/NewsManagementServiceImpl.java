@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.dao.sys.service.SysUserService;
 import jx.pgz.dao.yw.entity.NewsManagement;
+import jx.pgz.dao.yw.entity.SportsClocking;
 import jx.pgz.dao.yw.mapper.NewsManagementMapper;
 import jx.pgz.dao.yw.service.NewsManagementService;
+import jx.pgz.enums.RoleTypeEnum;
 import jx.pgz.model.dto.PageDTO;
 import jx.pgz.utils.UserContext;
 import lombok.RequiredArgsConstructor;
@@ -41,10 +43,19 @@ public class NewsManagementServiceImpl extends ServiceImpl<NewsManagementMapper,
 
     @Override
     public Page<NewsManagement> pageQuery(PageDTO pageDTO) {
+        String role = UserContext.getInstance().getUserRole();
         Set<Long> userIds = new HashSet<>();
-        Page<NewsManagement> page = lambdaQuery().
-                like(StringUtils.hasText(pageDTO.getSearch()), NewsManagement::getContent, pageDTO.getSearch()).
-                page(pageDTO.getMybatisPage());
+        Page<NewsManagement> page;
+        if (role.equals(RoleTypeEnum.ADMIN.name())) {
+            page = lambdaQuery().
+                    like(StringUtils.hasText(pageDTO.getSearch()), NewsManagement::getContent, pageDTO.getSearch()).
+                    page(pageDTO.getMybatisPage());
+        } else {
+            page = lambdaQuery()
+                    .eq(NewsManagement::getCreateBy, UserContext.getInstance().getUserId()).
+                    like(StringUtils.hasText(pageDTO.getSearch()), NewsManagement::getContent, pageDTO.getSearch()).
+                    page(pageDTO.getMybatisPage());
+        }
         if (page.getTotal() > 0) {
             for (NewsManagement record : page.getRecords()) {
                 userIds.add(record.getCreateBy());

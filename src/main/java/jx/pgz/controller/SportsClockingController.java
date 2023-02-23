@@ -28,7 +28,7 @@ public class SportsClockingController {
 
     @PostMapping("page")
     public Result<Page<SportsClocking>> page(@RequestBody PageDTO pageDTO) {
-        return Result.ok(sportsClockingService.page(pageDTO.getMybatisPage()));
+        return Result.ok(sportsClockingService.pageQuery(pageDTO));
     }
 
 

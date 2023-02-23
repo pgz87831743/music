@@ -41,7 +41,7 @@ public class MessageManagementController {
 
     @PostMapping("add")
     public Result<Boolean> add(@RequestBody MessageManagement obj) {
-        return Result.ok(messageManagementService.save(obj));
+        return Result.ok(messageManagementService.save(obj)).setShowMsg(true).setMsg("留言成功");
     }
 
 
