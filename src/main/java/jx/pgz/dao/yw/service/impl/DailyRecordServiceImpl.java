@@ -55,6 +55,14 @@ public class DailyRecordServiceImpl extends ServiceImpl<DailyRecordMapper, Daily
     @Override
     @Transactional
     public boolean saveDailyRecord(DailyRecord dailyRecord) {
+        String dataStr = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        DailyRecord one = lambdaQuery()
+                .eq(DailyRecord::getPetId, dailyRecord.getPetId())
+                .eq(DailyRecord::getDataStr, dataStr).one();
+        if (one!=null){
+            throw new MyRuntimeException(one.getPetName()+"一天只能记录一次");
+        }
+
 
         //饮水量
         Double ysl = dailyRecord.getYsl();
@@ -77,25 +85,25 @@ public class DailyRecordServiceImpl extends ServiceImpl<DailyRecordMapper, Daily
         //宠物年龄
         Float nl = petFile.getNl();
         if (nl > 10) {
-            tjws = tjys * 1.4;
+            tjws = tjws * 1.4;
         } else {
-            tjws = tjys * 2.5;
+            tjws = tjws * 2.5;
         }
 
         List<HealthMonitoring> list = new ArrayList<>();
 
         //we
         if (wsl < (tjws*0.2)) {
-            obj(list,petFile,"喂食量过少请减少喂食量至（标准值）"+tjws+"kcal左右");
+            obj(list,petFile,"喂食量过少请增加喂食量至（标准值）"+String.format("%.2f", tjws)+"kcal左右");
         } else if (wsl > (tjws*1.2)) {
-            obj(list,petFile,"喂食量过多请增加喂食量至（标准值）"+tjws+"kcal左右");
+            obj(list,petFile,"喂食量过多请减少喂食量至（标准值）"+String.format("%.2f", tjws)+"kcal左右");
         }
 
 
         if (ysl < (tjys*0.5)) {
-            obj(list,petFile,"饮水量过少，可能是疾病信号，推荐饮水量为（标准值）"+tjys+"ml");
+            obj(list,petFile,"饮水量过少，可能是疾病信号，推荐饮水量为（标准值）"+String.format("%.2f", tjys)+"ml");
         } else if (ysl > (tjys*1.5)) {
-            obj(list,petFile,"饮水量过多，可能是疾病信号，推荐饮水量为（标准值）"+tjys+"ml");
+            obj(list,petFile,"饮水量过多，可能是疾病信号，推荐饮水量为（标准值）"+String.format("%.2f", tjys)+"ml");
         }
 
 
@@ -125,18 +133,19 @@ public class DailyRecordServiceImpl extends ServiceImpl<DailyRecordMapper, Daily
             obj(list,petFile,"宠物活跃度过低，系统推荐里生成一条推荐(请陪伴并促进您的宠物多加活动)");
         }
         if ("是".equals(oldList.get(0).getQc())){
-            if (oldList.get(1)!=null){
+            if(oldList.size()>=2){
                 long l = Duration.between(LocalDateTime.now(), oldList.get(1).getCreateTime()).toDays();
-                if (l>30){
+                if (l<30){
                     obj(list,petFile,"驱虫过于频繁，推荐内容为：驱虫时间请最少间隔一个月");
                 }
             }
+
         }
 
 
 
         dailyRecord.setPetName(petFile.getXm());
-        dailyRecord.setDataStr(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        dailyRecord.setDataStr(dataStr);
         boolean b = saveOrUpdate(dailyRecord);
 
 
@@ -159,11 +168,6 @@ public class DailyRecordServiceImpl extends ServiceImpl<DailyRecordMapper, Daily
     }
 
 
-    public static void main(String[] args) {
 
-
-        System.out.println(Duration.between(LocalDateTime.now(), LocalDateTime.now().plusDays(6)).toDays());
-
-    }
 
 }
