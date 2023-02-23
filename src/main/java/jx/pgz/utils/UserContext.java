@@ -63,7 +63,7 @@ public class UserContext {
      */
     public Long getUserId() {
         if (getContext() != null) {
-            return Long.valueOf((Integer) getContext().get("userId")) ;
+            return Long.valueOf((Integer) getContext().get("userId"));
         }
         return null;
     }
@@ -71,6 +71,13 @@ public class UserContext {
     public Long getExpirationTime() {
         if (getContext() != null) {
             return (Long) getContext().get("expirationTime");
+        }
+        return null;
+    }
+
+    public String getUserRole() {
+        if (getContext() != null) {
+            return (String) getContext().get("role");
         }
         return null;
     }

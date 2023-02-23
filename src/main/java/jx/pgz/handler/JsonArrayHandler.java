@@ -21,7 +21,7 @@ public class JsonArrayHandler extends JacksonTypeHandler {
 
     @Override
     protected Object parse(String json) {
-        return JSON.parseArray(json, type);
+        return JSON.parseArray(json, String.class);
     }
 
     @Override

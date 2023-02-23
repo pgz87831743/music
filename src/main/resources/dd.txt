@@ -1,0 +1,6 @@
+<el-form-item label="相约地点"><el-input v-model="form.address"/></el-form-item>
+<el-form-item label="报名人员"><el-input v-model="form.concomitant_person"/></el-form-item>
+<el-form-item label="相约时间"><el-input v-model="form.concomitant_time"/></el-form-item>
+<el-form-item label="相约描述"><el-input v-model="form.content"/></el-form-item>
+<el-form-item label="发起人"><el-input v-model="form.create_by"/></el-form-item>
+<el-form-item label="创建时间"><el-input v-model="form.create_time"/></el-form-item>

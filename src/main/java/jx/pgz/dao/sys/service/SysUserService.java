@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author 
+ * 
  * @since 2023-02-16
  */
 public interface SysUserService extends IService<SysUser> {

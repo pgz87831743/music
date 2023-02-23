@@ -24,7 +24,7 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
         SysUser user = sysUserService.lambdaQuery().eq(SysUser::getUsername, username)
                 .eq(SysUser::getPassword, password).one();
         if (user != null) {
-            String token = JWTUtil.createToken(user.getId(), user.getUsername(), propertiesConfiguration.getTokenKey(), propertiesConfiguration.getExpireMinutes());
+            String token = JWTUtil.createToken(user, propertiesConfiguration.getTokenKey(), propertiesConfiguration.getExpireMinutes());
             user.setToken(token);
             Claims claims = JWTUtil.parseToken(token, propertiesConfiguration.getTokenKey());
             UserContext.getInstance().setContext(claims);
@@ -42,7 +42,7 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
         if (user != null) {
             throw new MyRuntimeException("用户已存在");
         }
-        SysUser newUser = SysUser.builder().username(username).password(password).build();
+        SysUser newUser = SysUser.builder().role("USER").username(username).password(password).build();
         sysUserService.save(newUser);
         return newUser;
     }
@@ -55,7 +55,7 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
         }
         Long userId = Long.valueOf(claims.get("userId")+"") ;
         SysUser user = sysUserService.getById(userId);
-        String newToken = JWTUtil.createToken(userId, user.getUsername(), propertiesConfiguration.getTokenKey(), propertiesConfiguration.getExpireMinutes());
+        String newToken = JWTUtil.createToken(user, propertiesConfiguration.getTokenKey(), propertiesConfiguration.getExpireMinutes());
         user.setToken(newToken);
         Claims newClaims = JWTUtil.parseToken(newToken, propertiesConfiguration.getTokenKey());
         UserContext.getInstance().setContext(newClaims);

@@ -1,4 +1,4 @@
-package jx.pgz.dao.sys.entity;
+package jx.pgz.dao.yw.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -7,47 +7,54 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jx.pgz.dao.sys.entity.SysUser;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ * 运动打卡
  * </p>
- *
- * 
- * @since 2023-02-16
+
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Builder
-@AllArgsConstructor@NoArgsConstructor
-public class SysUser implements Serializable {
+public class SportsClocking implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 主键
+     */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String username;
+    /**
+     * 打卡地点
+     */
+    private String address;
 
-    @JsonIgnoreProperties
-    private String password;
+    /**
+     * 打卡描述
+     */
+    private String content;
 
-    private String role;
-
+    /**
+     * 打卡时间
+     */
     @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createTime;
 
-
+    /**
+     * 打卡人物
+     */
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
 
-
     @TableField(exist = false)
-    private String token;
+    private SysUser createByUser;
 
 
 }

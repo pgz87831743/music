@@ -1,4 +1,4 @@
-package jx.pgz.dao.sys.entity;
+package jx.pgz.dao.yw.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -7,47 +7,59 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jx.pgz.dao.sys.entity.SysUser;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ * 新闻管理
  * </p>
- *
- * 
- * @since 2023-02-16
+
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Builder
-@AllArgsConstructor@NoArgsConstructor
-public class SysUser implements Serializable {
+public class NewsManagement implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 主键
+     */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String username;
+    /**
+     * 新闻标题
+     */
+    private String title;
 
-    @JsonIgnoreProperties
-    private String password;
+    /**
+     * 新闻内容
+     */
+    private String content;
 
-    private String role;
+    /**
+     * 浏览次数
+     */
+    private Long times;
 
+    /**
+     * 发布时间
+     */
     @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createTime;
 
-
+    /**
+     * 发布人
+     */
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
 
-
     @TableField(exist = false)
-    private String token;
+    private SysUser createByUser;
 
 
 }

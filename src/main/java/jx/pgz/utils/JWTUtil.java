@@ -7,6 +7,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jx.pgz.dao.sys.entity.SysUser;
 
 
 import javax.crypto.spec.SecretKeySpec;
@@ -48,13 +49,15 @@ public class JWTUtil {
         }
     }
 
+
     /**
-     * 生成token
      *
-     * @param userId
+     * @param user
+     * @param key
+     * @param expireMinutes
      * @return
      */
-    public static String createToken(Long userId,String username,String key, int expireMinutes) {
+    public static String createToken(SysUser user ,String key, int expireMinutes) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         //生成签名密钥
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(key);
@@ -64,8 +67,9 @@ public class JWTUtil {
         //添加构成JWT的参数
         Date date = new Date(System.currentTimeMillis() + Duration.between(LocalDateTime.now(), LocalDateTime.now().plusMinutes(expireMinutes)).toMillis());
         JwtBuilder builder = Jwts.builder()
-                .claim("userId",userId) // 设置载荷信息
-                .claim("username",username)
+                .claim("userId",user.getId()) // 设置载荷信息
+                .claim("username",user.getUsername())
+                .claim("role",user.getRole())
                 .claim("expirationTime",date.getTime())
                 .setExpiration(date)// 设置超时时间
                 .signWith(signatureAlgorithm, signingKey);
@@ -75,18 +79,6 @@ public class JWTUtil {
     }
 
 
-    public static void main(String[] args) {
-
-        String token = JWTUtil.createToken(1L, "zhangsan","admin", 30);
-        System.out.println(token);
-
-//        String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiemhhbmdzYW4iLCJhZ2UiOjIzLCJzZXgiOiLnlLciLCJleHAiOjE2MDY3MjYyOTB9.3yrt1Njzy7FTq56oz6u4W40Jv9msh_77tubN10TLTYI";
-
-        Claims claims = JWTUtil.parseToken(token, "admin");
-
-        System.out.println(claims.get("username"));
-
-    }
 
 
 }

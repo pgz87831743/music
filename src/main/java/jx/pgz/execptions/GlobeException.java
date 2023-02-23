@@ -14,15 +14,15 @@ public class GlobeException {
 
 
     @ExceptionHandler(Throwable.class)
-    public Result<Object> bindException(Throwable exception) {
+    public Result<String> bindException(Throwable exception) {
         exception.printStackTrace();
-        return Result.fail(exception.getMessage());
+        return Result.fail(exception.getMessage()).setShowMsg(true);
     }
 
     @ExceptionHandler(Exception.class)
-    public Result<Object> bindException(Exception exception) {
+    public Result<String> bindException(Exception exception) {
         exception.printStackTrace();
-        return Result.fail(exception.getMessage());
+        return Result.fail(exception.getMessage()).setShowMsg(true);
     }
 
     @ExceptionHandler(RuntimeException.class)

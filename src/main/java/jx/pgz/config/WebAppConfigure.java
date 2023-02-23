@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author pengmf
+ * pengmf
  */
 @Configuration
 public class WebAppConfigure implements WebMvcConfigurer {

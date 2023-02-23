@@ -18,6 +18,8 @@ public class PageDTO {
     @ApiModelProperty(value = "每页记录数", example = "10")
     private Integer pageSize = 10;
 
+    private String search;
+
 
     /**
      * 获取页面对象

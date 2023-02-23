@@ -22,11 +22,14 @@ public class CodeGenerator {
     public static void main(String[] args) {
 
 
-        String url = "jdbc:mysql://localhost:3306/basic_service?characterEncoding=UTF-8";
+        String url = "jdbc:mysql://localhost:3306/school?characterEncoding=UTF-8";
         String driverName = "com.mysql.cj.jdbc.Driver";
         String username ="root";
         String password = "123456";
-        String[] table = new String[]{"feeding_skills"};
+        String[] table = new String[]{"concomitant_motion" ,
+                "message_management" ,
+                "news_management" ,
+                "sports_clocking"};
 
 
 
@@ -80,7 +83,7 @@ public class CodeGenerator {
 
         TemplateConfig templateConfig = new TemplateConfig();
         templateConfig.setXml(null);
-        templateConfig.setController(null);
+//        templateConfig.setController(null);
         mpg.setTemplate(templateConfig);
 
         strategy.setNaming(NamingStrategy.underline_to_camel);
