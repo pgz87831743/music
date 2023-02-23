@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import jx.pgz.dao.yw.entity.PetFile;
 import jx.pgz.dao.yw.service.PetFileService;
+import jx.pgz.execptions.MyRuntimeException;
 import jx.pgz.model.dto.PageCwdaDTO;
 import jx.pgz.model.dto.PageDTO;
 import jx.pgz.utils.Result;
@@ -41,6 +42,12 @@ public class PetFileController {
 
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody PetFile petFile) {
+        PetFile one = petFileService.lambdaQuery().eq(PetFile::getXm, petFile.getXm())
+                .eq(PetFile::getCreateBy, UserContext.getInstance().getUserId())
+                .one();
+        if (one!=null){
+            throw new MyRuntimeException("存在相同的宠物");
+        }
         petFile.setNl((float) (petFile.getN()*12+petFile.getY()));
         return Result.ok(petFileService.saveOrUpdate(petFile)).setShowMsg(true).setMsg("操作成功");
     }
