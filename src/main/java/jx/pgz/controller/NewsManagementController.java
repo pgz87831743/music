@@ -36,8 +36,8 @@ public class NewsManagementController {
     }
 
 
-    @PostMapping("queryById/{id}")
-    public Result<NewsManagement> page(@PathVariable("id") Long id) {
+    @GetMapping("queryById/{id}")
+    public Result<Boolean> page(@PathVariable("id") Long id) {
         NewsManagement byId = newsManagementService.getById(id);
         if (byId.getTimes()!=null){
             byId.setTimes(byId.getTimes()+1);
@@ -45,8 +45,7 @@ public class NewsManagementController {
         else{
             byId.setTimes(1L);
         }
-        newsManagementService.updateById(byId);
-        return Result.ok(byId);
+        return Result.ok( newsManagementService.updateById(byId));
     }
 
 
