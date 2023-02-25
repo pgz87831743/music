@@ -70,7 +70,7 @@ public class FilesServiceFaceImpl implements FilesServiceFace, InitializingBean 
         filesService.saveBatch(filesInfo);
 
         filesInfo.forEach(s -> {
-            s.setAccessPath(accessApi + s.getPath());
+            s.setUrl(accessApi + s.getPath());
         });
 
         return filesInfo;

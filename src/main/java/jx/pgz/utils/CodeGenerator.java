@@ -22,14 +22,11 @@ public class CodeGenerator {
     public static void main(String[] args) {
 
 
-        String url = "jdbc:mysql://localhost:3306/school?characterEncoding=UTF-8";
+        String url = "jdbc:mysql://localhost:3306/basic_service?characterEncoding=UTF-8";
         String driverName = "com.mysql.cj.jdbc.Driver";
         String username ="root";
         String password = "123456";
-        String[] table = new String[]{"concomitant_motion" ,
-                "message_management" ,
-                "news_management" ,
-                "sports_clocking"};
+        String[] table = new String[]{"report_forms"};
 
 
 

@@ -1,18 +1,17 @@
 package jx.pgz.dao.yw.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import jx.pgz.dao.yw.entity.MessageManagement;
+import jx.pgz.dao.yw.entity.ReportForms;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jx.pgz.model.dto.PageDTO;
 
 /**
  * <p>
- * 留言管理 服务类
+ * 培训报表 服务类
  * </p>
 
  */
-public interface MessageManagementService extends IService<MessageManagement> {
+public interface ReportFormsService extends IService<ReportForms> {
 
-    Page<MessageManagement> pageQuery(PageDTO pageDTO);
-
+    Page<ReportForms> pageQuery(PageDTO pageDTO);
 }
