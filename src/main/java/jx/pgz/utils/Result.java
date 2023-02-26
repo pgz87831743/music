@@ -1,8 +1,8 @@
 package jx.pgz.utils;
 
 import jx.pgz.enums.ResultCodeEnum;
+import jx.pgz.security.UserContext;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;

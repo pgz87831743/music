@@ -22,11 +22,11 @@ public class CodeGenerator {
     public static void main(String[] args) {
 
 
-        String url = "jdbc:mysql://localhost:3306/basic_service?characterEncoding=UTF-8";
+        String url = "jdbc:mysql://localhost:3306/basic?characterEncoding=UTF-8";
         String driverName = "com.mysql.cj.jdbc.Driver";
         String username ="root";
         String password = "123456";
-        String[] table = new String[]{"report_forms"};
+        String[] table = new String[]{"sys_authority","sys_file" ,"sys_role" ,"sys_user"};
 
 
 
@@ -54,7 +54,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("yw");
+        pc.setModuleName("sys");
         pc.setParent("jx.pgz.dao");
         mpg.setPackageInfo(pc);
 

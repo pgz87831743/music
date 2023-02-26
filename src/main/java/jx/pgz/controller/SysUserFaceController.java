@@ -6,9 +6,9 @@ import io.swagger.annotations.ApiOperation;
 import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.model.dto.LoginDTO;
 import jx.pgz.security.IgnoreAuth;
+import jx.pgz.security.UserContext;
 import jx.pgz.server.SysUserServiceFace;
 import jx.pgz.utils.Result;
-import jx.pgz.utils.UserContext;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

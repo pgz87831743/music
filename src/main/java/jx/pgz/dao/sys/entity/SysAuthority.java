@@ -2,16 +2,13 @@ package jx.pgz.dao.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ * 权限表
  * </p>
  *
  * @author 
@@ -19,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SysFile implements Serializable {
+public class SysAuthority implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,25 +27,24 @@ public class SysFile implements Serializable {
     private Long id;
 
     /**
-     * 文件名称
+     * 权限名
      */
     private String name;
 
     /**
-     * md5
+     * 描述
      */
-    private String md5;
+    private String description;
 
     /**
-     * 文件路径
+     * 权限类型 mean button
      */
-    private String path;
+    private String type;
 
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(fill = FieldFill.INSERT)
-    private Long createBy;
+    /**
+     * 路径
+     */
+    private String url;
 
 
 }

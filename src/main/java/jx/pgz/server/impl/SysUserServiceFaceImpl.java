@@ -6,8 +6,8 @@ import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.dao.sys.service.SysUserService;
 import jx.pgz.execptions.MyRuntimeException;
 import jx.pgz.server.SysUserServiceFace;
-import jx.pgz.utils.JWTUtil;
-import jx.pgz.utils.UserContext;
+import jx.pgz.security.JWTUtil;
+import jx.pgz.security.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -42,7 +42,7 @@ public class SysUserServiceFaceImpl implements SysUserServiceFace {
         if (user != null) {
             throw new MyRuntimeException("用户已存在");
         }
-        SysUser newUser = SysUser.builder().role("USER").username(username).password(password).build();
+        SysUser newUser = SysUser.builder().username(username).password(password).build();
         sysUserService.save(newUser);
         return newUser;
     }
