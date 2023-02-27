@@ -51,4 +51,6 @@ public class SysFile implements Serializable {
     private Long createBy;
 
 
+    @TableField(exist = false)
+    private String url;
 }
