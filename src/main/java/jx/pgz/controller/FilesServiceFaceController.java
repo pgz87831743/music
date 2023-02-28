@@ -6,14 +6,15 @@ import io.swagger.annotations.ApiParam;
 import jx.pgz.dao.sys.entity.SysFile;
 import jx.pgz.enums.FileTypeEnum;
 import jx.pgz.server.FilesServiceFace;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.annotation.security.PermitAll;
 import java.util.List;
 
-@Controller
 @RequestMapping("/file")
 @RestController
 @Api(tags = "文件管理")

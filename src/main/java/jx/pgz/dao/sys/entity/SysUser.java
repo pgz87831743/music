@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,11 +15,10 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 
- * @since 2023-02-26
+ * @since 2023-02-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Builder
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,7 +42,7 @@ public class SysUser implements Serializable {
     /**
      * 昵称
      */
-    private String name;
+    private String nickname;
 
     /**
      * 头像
@@ -55,17 +52,32 @@ public class SysUser implements Serializable {
     /**
      * 性别
      */
-    private String sex;
+    private String
+            sex;
 
     /**
      * 手机
      */
     private String phone;
 
+
     /**
-     * 用户角色
+     * 邮箱
      */
-    private String role;
+    private String email;
+
+
+    /**
+     * 年龄
+     */
+    private Integer age;
+
+
+    /**
+     * 会员等级
+     */
+    private Integer level;
+
 
     /**
      * 创建时间
@@ -79,7 +91,5 @@ public class SysUser implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createBy;
 
-    @TableField(exist = false)
-    private String token;
 
 }

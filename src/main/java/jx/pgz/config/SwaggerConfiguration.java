@@ -55,7 +55,7 @@ public class SwaggerConfiguration {
      */
     private static List<ApiKey> unifiedAuth() {
         List<ApiKey> apiKeys = new ArrayList<>();
-        apiKeys.add(new ApiKey("Authorization", "token", "header"));
+        apiKeys.add(new ApiKey("Authorization", "Authorization", "header"));
         return apiKeys;
     }
 

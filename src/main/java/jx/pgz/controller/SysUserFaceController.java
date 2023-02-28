@@ -4,57 +4,68 @@ package jx.pgz.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jx.pgz.dao.sys.entity.SysUser;
+import jx.pgz.enums.ResultCodeEnum;
+import jx.pgz.execptions.MyRuntimeException;
 import jx.pgz.model.dto.LoginDTO;
-import jx.pgz.security.IgnoreAuth;
-import jx.pgz.security.UserContext;
-import jx.pgz.server.SysUserServiceFace;
+import jx.pgz.security.JwtToken;
+import jx.pgz.security.JwtUtil;
+import jx.pgz.server.UserServiceFace;
 import jx.pgz.utils.Result;
+import lombok.RequiredArgsConstructor;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RequestMapping("/user")
 @RestController
 @Api(tags = "用户操作")
+@RequiredArgsConstructor
 public class SysUserFaceController {
 
+    private final UserServiceFace userServiceFace;
 
-    @Resource
-    private SysUserServiceFace sysUserServiceFace;
-
-
-    @PostMapping("/login")
+    /**
+     * 自定义token登录
+     *
+     * @return
+     */
     @ApiOperation("登录")
-    @IgnoreAuth
-    public Result<SysUser> login(@RequestBody LoginDTO loginDTO) {
-        return Result.ok(sysUserServiceFace.login(loginDTO.getUsername(), loginDTO.getPassword()));
+    @PostMapping(value = "/login")
+    public Result<Object> login(@RequestBody LoginDTO loginDTO) {
+        if (!StringUtils.hasText(loginDTO.getUsername()) || !StringUtils.hasText(loginDTO.getPassword())) {
+            throw new MyRuntimeException("账号密码不能为空");
+        }
+        Subject subject = SecurityUtils.getSubject();
+        String token = JwtUtil.createJWT(loginDTO.getUsername(), "back", "user", Duration.ofDays(3).toMillis());
+        JwtToken jwtToken = new JwtToken(token, loginDTO.getPassword());
+        try {
+            subject.login(jwtToken);
+        } catch (UnknownAccountException e) {
+            throw new MyRuntimeException("账号不存在");
+        } catch (IncorrectCredentialsException e) {
+            throw new MyRuntimeException("密码错误");
+        }
+        SysUser backUser = userServiceFace.getUserByUsername(loginDTO.getUsername());
+        Map<String, Object> map = new HashMap<>();
+        map.put("user", backUser);
+        map.put("token", token);
+        return Result.builder().msg("登录成功").showMsg(true).code(ResultCodeEnum.SUCCESS.getCode()).data(map).build();
     }
 
-    @PostMapping("/register")
-    @ApiOperation("注册")
-    @IgnoreAuth
-    public Result<SysUser> register(@RequestBody LoginDTO loginDTO) {
-        return Result.ok(sysUserServiceFace.register(loginDTO.getUsername(), loginDTO.getPassword())).setMsg("注册成功").setShowMsg(true);
-    }
 
-    @PostMapping("/refreshToken")
-    @ApiOperation("刷新token")
-    public Result<SysUser> refreshToken(@RequestParam("token") String token) {
-        return Result.ok(sysUserServiceFace.refreshToken(token));
-    }
-
-
-    @PostMapping("/getCurrenUser")
-    @ApiOperation("获取user")
-    public Result<SysUser> getCurrenUser() {
-        return Result.ok(sysUserServiceFace.getCurrentUser(UserContext.getInstance().getUserId()));
-    }
-
-    @PostMapping("/updateUser")
-    @ApiOperation("获取user")
-    public Result<Boolean> updateUser(@RequestBody SysUser sysUser) {
-        return Result.ok(sysUserServiceFace.updateUser(sysUser));
+    @ApiOperation("退出登录")
+    @GetMapping("/logout")
+    public Result logout() {
+        SecurityUtils.getSubject().logout();
+        return new Result().setCode(200).setMsg("成功退出").setShowMsg(true);
     }
 
 

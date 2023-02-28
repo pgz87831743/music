@@ -1,17 +1,14 @@
 package jx.pgz.config;
 
-import jx.pgz.security.AuthInterceptor;
-import jx.pgz.security.PermissionInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
 
 /**
- * pengmf
+ *
  */
 @Configuration
 public class WebAppConfigure implements WebMvcConfigurer {
@@ -23,11 +20,6 @@ public class WebAppConfigure implements WebMvcConfigurer {
     @Value("${attachment.accessPath}")
     public String accessPath;
 
-    @Resource
-    private AuthInterceptor authInterceptor;
-
-    @Resource
-    private PermissionInterceptor permissionInterceptor;
 
     @Resource
     private PropertiesConfiguration propertiesConfiguration;
@@ -42,16 +34,5 @@ public class WebAppConfigure implements WebMvcConfigurer {
         registry.addResourceHandler(accessPath).addResourceLocations("file:" + filePath);
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
 
-
-        registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns(propertiesConfiguration.getIgnoreUrl());
-
-        registry.addInterceptor(permissionInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns(propertiesConfiguration.getIgnoreUrl());
-    }
 }

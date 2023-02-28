@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 
- * @since 2023-02-26
+ * @since 2023-02-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -45,6 +45,11 @@ public class SysAuthority implements Serializable {
      * 路径
      */
     private String url;
+
+    /**
+     * 父id
+     */
+    private String pid;
 
 
 }

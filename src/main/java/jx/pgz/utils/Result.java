@@ -1,8 +1,8 @@
 package jx.pgz.utils;
 
 import jx.pgz.enums.ResultCodeEnum;
-import jx.pgz.security.UserContext;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Result<T> implements Serializable {
 
     //状态码
@@ -25,9 +26,7 @@ public class Result<T> implements Serializable {
     //操作信息
     private String msg;
     private boolean showMsg=false;
-    private boolean success=true;
 
-    private Long expirationTime = UserContext.getInstance().getExpirationTime();
 
 
     public static <T> Result<T> ok(T data) {
