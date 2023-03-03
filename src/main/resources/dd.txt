@@ -1,6 +1,0 @@
- <el-form-item label="主键"><el-input v-model="form.id"/></el-form-item>
- <el-form-item label="权限名"><el-input v-model="form.name"/></el-form-item>
- <el-form-item label="描述"><el-input v-model="form.description"/></el-form-item>
- <el-form-item label="权限类型 mean button"><el-input v-model="form.type"/></el-form-item>
- <el-form-item label="路径"><el-input v-model="form.url"/></el-form-item>
- <el-form-item label="父id"><el-input v-model="form.pid"/></el-form-item>

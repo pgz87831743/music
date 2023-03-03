@@ -25,7 +25,7 @@ public class Result<T> implements Serializable {
 
     //操作信息
     private String msg;
-    private boolean showMsg=false;
+
 
 
 

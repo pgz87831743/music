@@ -20,7 +20,6 @@
         <druid.version>1.2.8</druid.version>
 
     </properties>
-
     <dependencies>
 
 
@@ -34,11 +33,6 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring-boot-web-starter</artifactId>
-            <version>1.10.0</version>
-        </dependency>
 
 
 
@@ -132,7 +126,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.3.2</version>
+            <version>3.5.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.baomidou</groupId>
@@ -144,6 +138,7 @@
 
 
     </dependencies>
+
 
     <dependencyManagement>
         <dependencies>

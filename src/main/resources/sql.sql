@@ -1,20 +1,38 @@
-create table report_forms
+create table car
 (
-    id  bigint primary key auto_increment comment '序号',
-    f1  varchar(500) null comment '部门',
-    f2  varchar(500) null comment '培训对象',
-    f3  varchar(500) null comment '培训标题',
-    f4  varchar(500) null comment '培训类型',
-    f5  varchar(500) null comment '培训费用(元)',
-    f6  varchar(500) null comment '培训日期',
-    f7  varchar(500) null comment '培训课时(h)',
-    f8  varchar(500) null comment '培训讲师',
-    f9  varchar(500) null comment '培训机构',
-    f10 varchar(500) null comment '培训原因',
-    f11 varchar(500) null comment '佐证资料',
-    f12 varchar(500) null comment '上传附件',
-    f13 varchar(500) null comment '其它说明'
-) comment '培训报表';
+    id   bigint primary key auto_increment comment '汽车编号',
+    name varchar(64) comment '汽车名称'
+) comment '汽车表';
 
 
+create table report
+(
+    id bigint primary key auto_increment comment 'ID',
+    car_id bigint comment '汽车ID',
+    par_id bigint comment '零件ID',
+    pass  varchar(5) comment '是否合格',
+    check_time datetime comment '检测时间'
+) comment '检测表';
 
+
+create table car_part
+(
+    id              bigint primary key auto_increment comment 'ID',
+    car_id          bigint comment '汽车编号',
+    part_id         bigint comment '零件编号',
+    actual_quantity int comment '实际数量'
+) comment '汽车零件关联表';
+
+create table part
+(
+    id   bigint primary key auto_increment comment '零件编号',
+    name varchar(64) comment '零件名称',
+    num  int comment '库存'
+) comment '零件表';
+
+create table transfer_order
+(
+    part_id bigint comment '零件编号',
+    num     int comment '调拨数量',
+    car_id  bigint comment '汽车编号'
+) comment '调拨单';
