@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.apache.ibatis.reflection.MetaObject;
+import org.apache.shiro.SecurityUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,9 +31,8 @@ public class MyBatisPlusConfiguration implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now()); // 起始版本 3.3.0(推荐使用)
-
-
+        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+        this.strictInsertFill(metaObject, "createBy", String.class, SecurityUtils.getSubject().getPrincipal().toString());
     }
 
     @Override

@@ -89,7 +89,7 @@ public class SysUser implements Serializable {
      * 创建人
      */
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createBy;
+    private String createBy;
 
 
 }

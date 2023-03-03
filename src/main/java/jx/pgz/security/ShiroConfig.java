@@ -38,7 +38,6 @@ public class ShiroConfig {
         bean.setFilters(map);
         Map<String, String> filterMap = new LinkedHashMap<>();
         //不需要认证的
-        filterMap.put("/login", "anon");
         filterMap.put("/doc.html", "anon");
         filterMap.put("/webjars/**", "anon");
         filterMap.put("/swagger-resources", "anon");
@@ -55,7 +54,7 @@ public class ShiroConfig {
         filterMap.put("/**", "authc");
 
 
-        bean.setLoginUrl("/user/login");
+        bean.setLoginUrl("/system/login");
         bean.setFilterChainDefinitionMap(filterMap);
         bean.setSecurityManager(defaultWebSecurityManager);
         bean.setFilterChainDefinitionMap(filterMap);

@@ -15,28 +15,28 @@ public class GlobeException {
 
 
     @ExceptionHandler(Throwable.class)
-    public Result<String> bindException(Throwable exception) {
+    public Result<Object> bindException(Throwable exception) {
         exception.printStackTrace();
-        return Result.fail(exception.getMessage());
+        return Result.fail().setMsg(exception.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public Result<String> bindException(Exception exception) {
+    public Result<Object> bindException(Exception exception) {
         exception.printStackTrace();
-        return Result.fail(exception.getMessage());
+        return Result.fail().setMsg(exception.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
     public Result<Object> bindException(RuntimeException exception) {
         exception.printStackTrace();
-        return Result.fail();
+        return Result.fail().setMsg(exception.getMessage());
     }
 
 
     @ExceptionHandler(MyRuntimeException.class)
     public Result<Object> bindException(MyRuntimeException exception) {
         exception.printStackTrace();
-        return Result.fail(exception.getMsg(), exception.getCode() == 0 ? ResultCodeEnum.FAIL.getCode() : exception.getCode());
+        return Result.fail().setMsg(exception.getMessage());
     }
 
 

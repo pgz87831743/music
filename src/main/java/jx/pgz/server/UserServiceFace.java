@@ -16,6 +16,12 @@ public interface UserServiceFace {
 
      List<SysRole> getRoleByUsername(String username);
 
+     List<SysRole> roleList(String username);
+
      List<SysAuthority> getAuthorityByUsername(String username);
+
+
+
+     List<SysAuthority> authorityTree();
 
 }

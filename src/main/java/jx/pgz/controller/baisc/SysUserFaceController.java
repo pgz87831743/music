@@ -1,8 +1,9 @@
-package jx.pgz.controller;
+package jx.pgz.controller.baisc;
 
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jx.pgz.dao.sys.entity.SysRole;
 import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.enums.ResultCodeEnum;
 import jx.pgz.execptions.MyRuntimeException;
@@ -21,10 +22,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-@RequestMapping("/user")
+@RequestMapping("/system")
 @RestController
 @Api(tags = "用户操作")
 @RequiredArgsConstructor
@@ -59,6 +61,24 @@ public class SysUserFaceController {
         map.put("token", token);
         return Result.builder().msg("登录成功").showMsg(true).code(ResultCodeEnum.SUCCESS.getCode()).data(map).build();
     }
+
+
+
+
+
+    @ApiOperation("获取所有角色")
+    @GetMapping("/roleList/{username}")
+    public Result<Object> roleList(@PathVariable("username")String username) {
+        return Result.builder().data(userServiceFace.roleList(username)).build();
+    }
+
+    @ApiOperation("权限菜单树")
+    @GetMapping("/authorityTree")
+    public Result<Object> authorityTree() {
+        return Result.builder().data(userServiceFace.authorityTree()).build();
+    }
+
+
 
 
     @ApiOperation("退出登录")

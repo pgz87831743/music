@@ -1,4 +1,4 @@
-package jx.pgz.controller;
+package jx.pgz.controller.baisc;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

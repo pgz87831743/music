@@ -1,40 +1,43 @@
 package jx.pgz.dao.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
  * 角色表
  * </p>
  *
- * @author 
- * @since 2023-02-27
+ * @author admin
+ * @since 2023
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
+@Accessors(chain = true)
+@TableName("sys_role")
+@ApiModel(value = "SysRole对象", description = "角色表")
 public class SysRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
+    @ApiModelProperty("主键")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 角色名
-     */
+    @ApiModelProperty("角色名")
     private String name;
 
-    /**
-     * 描述
-     */
+    @ApiModelProperty("描述")
     private String description;
 
-
+    @TableField(exist = false)
+    private boolean check;
 }
