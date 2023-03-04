@@ -34,7 +34,7 @@ mybatis-plus:
       logic-not-delete-value: 0
       # 表名前缀
   #枚举包扫描
-  #  type-enums-package: com.wavenet.common.enums
+  #  type-enums-package: xxx
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
