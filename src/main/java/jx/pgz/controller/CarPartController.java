@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jx.pgz.entity.CarPart;
 import jx.pgz.model.dto.PageDTO;
 import jx.pgz.service.CarPartService;
+import jx.pgz.service.CarService;
 import jx.pgz.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,10 +23,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/carPart")
-@RequiredArgsConstructor
+
 public class CarPartController {
 
-    private final CarPartService iCarPartService;
+    @Resource
+    private CarPartService iCarPartService;
+
+
 
 
     @PostMapping("page")

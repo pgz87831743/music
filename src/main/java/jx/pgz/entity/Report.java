@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -18,9 +20,7 @@ import lombok.experimental.Accessors;
  * @author admin
  * @since 2023
  */
-@Getter
-@Setter
-@Accessors(chain = true)
+
 @ApiModel(value = "Report对象", description = "检测表")
 public class Report implements Serializable {
 
@@ -40,7 +40,46 @@ public class Report implements Serializable {
     private String pass;
 
     @ApiModelProperty("检测时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime checkTime;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Long carId) {
+        this.carId = carId;
+    }
+
+    public Long getParId() {
+        return parId;
+    }
+
+    public void setParId(Long parId) {
+        this.parId = parId;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public LocalDateTime getCheckTime() {
+        return checkTime;
+    }
+
+    public void setCheckTime(LocalDateTime checkTime) {
+        this.checkTime = checkTime;
+    }
 }

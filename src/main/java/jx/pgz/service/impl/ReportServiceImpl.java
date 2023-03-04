@@ -22,8 +22,8 @@ import java.util.List;
 public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> implements ReportService {
         @Override
         public Page<Report> page(PageDTO pageDTO) {
-            return lambdaQuery()
-                    .eq(StringUtils.hasText(pageDTO.getSearch()),Report::getPass,pageDTO.getSearch())
+            return query()
+                    .eq(StringUtils.hasText(pageDTO.getSearch()),"pass",pageDTO.getSearch())
                     .page(pageDTO.getMybatisPage());
         }
         @Override

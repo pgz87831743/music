@@ -10,11 +10,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 
-@Data
-@Accessors(chain = true)
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+
 public class Result<T> implements Serializable {
 
     //状态码
@@ -25,7 +21,7 @@ public class Result<T> implements Serializable {
 
     //操作信息
     private String msg;
-
+    private boolean showMsg=false;
 
 
 
@@ -72,4 +68,35 @@ public class Result<T> implements Serializable {
     }
 
 
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public boolean isShowMsg() {
+        return showMsg;
+    }
+
+    public void setShowMsg(boolean showMsg) {
+        this.showMsg = showMsg;
+    }
 }

@@ -18,9 +18,7 @@ import lombok.experimental.Accessors;
  * @author admin
  * @since 2023
  */
-@Getter
-@Setter
-@Accessors(chain = true)
+
 @TableName("car_part")
 @ApiModel(value = "CarPart对象", description = "汽车零件关联表")
 public class CarPart implements Serializable {
@@ -40,5 +38,35 @@ public class CarPart implements Serializable {
     @ApiModelProperty("实际数量")
     private Integer actualQuantity;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Long carId) {
+        this.carId = carId;
+    }
+
+    public Long getPartId() {
+        return partId;
+    }
+
+    public void setPartId(Long partId) {
+        this.partId = partId;
+    }
+
+    public Integer getActualQuantity() {
+        return actualQuantity;
+    }
+
+    public void setActualQuantity(Integer actualQuantity) {
+        this.actualQuantity = actualQuantity;
+    }
 }

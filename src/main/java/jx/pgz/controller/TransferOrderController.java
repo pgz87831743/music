@@ -10,6 +10,7 @@ import jx.pgz.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,10 +23,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/transferOrder")
-@RequiredArgsConstructor
+
 public class TransferOrderController {
 
-    private final TransferOrderService iTransferOrderService;
+    @Resource
+    private  TransferOrderService iTransferOrderService;
 
 
     @PostMapping("page")

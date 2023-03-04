@@ -9,6 +9,7 @@ import jx.pgz.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,16 +21,17 @@ import java.util.List;
  * @since 2023
  */
 @Service
-@RequiredArgsConstructor
+
 public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarService {
 
-    private final ReportService reportService;
+    @Resource
+    private  ReportService reportService;
 
 
     @Override
     public Car getCarById(Long id) {
-        List<Report> reportList = reportService.lambdaQuery()
-                .eq(Report::getCarId, id)
+        List<Report> reportList = reportService.query()
+                .eq("car_id", id)
                 .list();
         Car car = getById(id);
         car.setReportList(reportList);

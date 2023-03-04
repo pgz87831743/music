@@ -19,9 +19,7 @@ import lombok.experimental.Accessors;
  * @author admin
  * @since 2023
  */
-@Getter
-@Setter
-@Accessors(chain = true)
+
 @ApiModel(value = "Car对象", description = "汽车表")
 public class Car implements Serializable {
 
@@ -34,8 +32,30 @@ public class Car implements Serializable {
     @ApiModelProperty("汽车名称")
     private String name;
 
-    @ApiModelProperty("检测明细")
+    @ApiModelProperty("检查明细")
     private List<Report> reportList;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Report> getReportList() {
+        return reportList;
+    }
+
+    public void setReportList(List<Report> reportList) {
+        this.reportList = reportList;
+    }
 }

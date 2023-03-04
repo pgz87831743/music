@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
 import jx.pgz.entity.Report;
 import jx.pgz.model.dto.PageDTO;
+import jx.pgz.service.CarPartService;
 import jx.pgz.service.ReportService;
 import jx.pgz.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,10 +24,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/report")
-@RequiredArgsConstructor
+
 public class ReportController {
 
-    private final ReportService iReportService;
+
+    @Resource
+    private ReportService iReportService;
 
 
     @PostMapping("page")

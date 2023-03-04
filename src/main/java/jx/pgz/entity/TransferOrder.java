@@ -16,9 +16,7 @@ import lombok.experimental.Accessors;
  * @author admin
  * @since 2023
  */
-@Getter
-@Setter
-@Accessors(chain = true)
+
 @TableName("transfer_order")
 @ApiModel(value = "TransferOrder对象", description = "调拨单")
 public class TransferOrder implements Serializable {
@@ -35,4 +33,27 @@ public class TransferOrder implements Serializable {
     private Long carId;
 
 
+    public Long getPartId() {
+        return partId;
+    }
+
+    public void setPartId(Long partId) {
+        this.partId = partId;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
+    public Long getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Long carId) {
+        this.carId = carId;
+    }
 }
