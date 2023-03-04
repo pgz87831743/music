@@ -1,0 +1,81 @@
+package ${package.Controller};
+
+
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${package.Entity}.${entity};
+import ${package.Service}.${entity}Service;
+import jx.pgz.model.dto.PageDTO;
+import jx.pgz.utils.Result;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@RestController
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+@RequiredArgsConstructor
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+    #if(${superControllerClass})
+    public class ${table.controllerName} extends ${superControllerClass} {
+    #else
+    public class ${table.controllerName} {
+    #end
+
+        private final ${entity}Service i${entity}Service;
+
+
+        @PostMapping("page")
+        public Result<Page<${entity}>> page(@RequestBody PageDTO pageDTO) {
+            return Result.ok(i${entity}Service.page(pageDTO));
+        }
+
+        @GetMapping("listAll")
+        public Result<List<${entity}>> listAll() {
+            return Result.ok(i${entity}Service.listAll());
+        }
+
+        @GetMapping("getById/{id}")
+        public Result<${entity}> get${entity}ById(@PathVariable("id") Long id) {
+            return Result.ok(i${entity}Service.get${entity}ById(id));
+        }
+
+        @DeleteMapping("deleteById/{id}")
+        public Result<Boolean> delete${entity}ById(@PathVariable("id") Long id) {
+            return Result.ok(i${entity}Service.delete${entity}ById(id));
+        }
+
+        @PostMapping("add")
+        public Result<Boolean> add${entity}(@RequestBody ${entity} obj) {
+            return Result.ok(i${entity}Service.add${entity}(obj));
+        }
+
+
+        @PutMapping("updateById")
+        public Result<Boolean> update${entity}ById(@RequestBody ${entity} obj) {
+            return Result.ok(i${entity}Service.update${entity}ById(obj));
+        }
+
+        }
+#end
