@@ -1,7 +1,5 @@
 package jx.pgz.security;
 
-import jx.pgz.dao.sys.entity.SysAuthority;
-import jx.pgz.dao.sys.entity.SysRole;
 import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.server.UserServiceFace;
 import lombok.RequiredArgsConstructor;
@@ -10,13 +8,9 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -27,14 +21,7 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
-
-        String username = (String) principalCollection.iterator().next();
-        Set<String> roleNames = userServiceFace.getRoleByUsername(username).stream().map(SysRole::getDescription).collect(Collectors.toSet());
-        Set<String> permission = userServiceFace.getAuthorityByUsername(username).stream().map(SysAuthority::getName).collect(Collectors.toSet());
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.setRoles(roleNames);
-        info.setStringPermissions(permission);
-        return info;
+        return null;
     }
 
     @Override

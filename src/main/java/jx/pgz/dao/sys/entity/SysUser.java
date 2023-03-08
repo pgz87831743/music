@@ -1,20 +1,21 @@
 package jx.pgz.dao.sys.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
  * 用户表
  * </p>
  *
- * @author 
+ * @author
  * @since 2023-02-27
  */
 @Data
@@ -40,43 +41,9 @@ public class SysUser implements Serializable {
     private String password;
 
     /**
-     * 昵称
+     * 盐
      */
-    private String nickname;
-
-    /**
-     * 头像
-     */
-    private String avatar;
-
-    /**
-     * 性别
-     */
-    private String
-            sex;
-
-    /**
-     * 手机
-     */
-    private String phone;
-
-
-    /**
-     * 邮箱
-     */
-    private String email;
-
-
-    /**
-     * 年龄
-     */
-    private Integer age;
-
-
-    /**
-     * 会员等级
-     */
-    private Integer level;
+    private String salt;
 
 
     /**
@@ -84,12 +51,6 @@ public class SysUser implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-
-    /**
-     * 创建人
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
 
 
 }
