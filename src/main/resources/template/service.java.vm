@@ -19,8 +19,8 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}>
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
         Page<${entity}> page(PageDTO pageDTO);
         List<${entity}> listAll();
-        ${entity} get${entity}ById(Long id);
-        boolean delete${entity}ById(Long id);
+        ${entity} get${entity}ById(String id);
+        boolean delete${entity}ById(String id);
         boolean add${entity}(${entity} obj);
         boolean update${entity}ById(${entity} obj);
 }

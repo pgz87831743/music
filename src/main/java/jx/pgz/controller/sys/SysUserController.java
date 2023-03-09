@@ -9,6 +9,7 @@ import jx.pgz.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,10 +22,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/sysUser")
-@RequiredArgsConstructor
 public class SysUserController {
 
-    private final SysUserService sysUserService;
+    @Resource
+    private  SysUserService sysUserService;
 
 
     @PostMapping("page")
@@ -38,12 +39,12 @@ public class SysUserController {
     }
 
     @GetMapping("getById/{id}")
-    public Result<SysUser> getSysUserById(@PathVariable("id") Long id) {
+    public Result<SysUser> getSysUserById(@PathVariable("id") String id) {
         return Result.ok(sysUserService.getSysUserById(id));
     }
 
     @DeleteMapping("deleteById/{id}")
-    public Result<Boolean> deleteSysUserById(@PathVariable("id") Long id) {
+    public Result<Boolean> deleteSysUserById(@PathVariable("id") String id) {
         return Result.ok(sysUserService.deleteSysUserById(id));
     }
 

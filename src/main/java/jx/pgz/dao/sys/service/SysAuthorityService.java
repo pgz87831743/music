@@ -16,8 +16,8 @@ import jx.pgz.model.dto.PageDTO;
 public interface SysAuthorityService extends IService<SysAuthority> {
         Page<SysAuthority> page(PageDTO pageDTO);
         List<SysAuthority> listAll();
-        SysAuthority getSysAuthorityById(Long id);
-        boolean deleteSysAuthorityById(Long id);
+        SysAuthority getSysAuthorityById(String id);
+        boolean deleteSysAuthorityById(String id);
         boolean addSysAuthority(SysAuthority obj);
         boolean updateSysAuthorityById(SysAuthority obj);
 }

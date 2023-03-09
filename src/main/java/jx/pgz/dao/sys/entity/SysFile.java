@@ -25,8 +25,8 @@ public class SysFile implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private String id;
 
     /**
      * 文件名称
@@ -47,7 +47,7 @@ public class SysFile implements Serializable {
     private LocalDateTime createTime;
 
     @TableField(fill = FieldFill.INSERT)
-    private Long createBy;
+    private String createBy;
 
 
     @TableField(exist = false)

@@ -1,7 +1,6 @@
 package jx.pgz.controller.sys;
 
 
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jx.pgz.dao.sys.entity.SysAuthority;
 import jx.pgz.dao.sys.service.SysAuthorityService;
@@ -10,10 +9,8 @@ import jx.pgz.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
 
 /**
  * <p>
@@ -25,41 +22,41 @@ import org.springframework.stereotype.Controller;
  */
 @RestController
 @RequestMapping("/sys/sysAuthority")
-@RequiredArgsConstructor
-    public class SysAuthorityController {
+public class SysAuthorityController {
 
-        private final SysAuthorityService iSysAuthorityService;
-
-
-        @PostMapping("page")
-        public Result<Page<SysAuthority>> page(@RequestBody PageDTO pageDTO) {
-            return Result.ok(iSysAuthorityService.page(pageDTO));
-        }
-
-        @GetMapping("listAll")
-        public Result<List<SysAuthority>> listAll() {
-            return Result.ok(iSysAuthorityService.listAll());
-        }
-
-        @GetMapping("getById/{id}")
-        public Result<SysAuthority> getSysAuthorityById(@PathVariable("id") Long id) {
-            return Result.ok(iSysAuthorityService.getSysAuthorityById(id));
-        }
-
-        @DeleteMapping("deleteById/{id}")
-        public Result<Boolean> deleteSysAuthorityById(@PathVariable("id") Long id) {
-            return Result.ok(iSysAuthorityService.deleteSysAuthorityById(id));
-        }
-
-        @PostMapping("add")
-        public Result<Boolean> addSysAuthority(@RequestBody SysAuthority obj) {
-            return Result.ok(iSysAuthorityService.addSysAuthority(obj));
-        }
+    @Resource
+    private  SysAuthorityService iSysAuthorityService;
 
 
-        @PutMapping("updateById")
-        public Result<Boolean> updateSysAuthorityById(@RequestBody SysAuthority obj) {
-            return Result.ok(iSysAuthorityService.updateSysAuthorityById(obj));
-        }
+    @PostMapping("page")
+    public Result<Page<SysAuthority>> page(@RequestBody PageDTO pageDTO) {
+        return Result.ok(iSysAuthorityService.page(pageDTO));
+    }
 
-        }
+    @GetMapping("listAll")
+    public Result<List<SysAuthority>> listAll() {
+        return Result.ok(iSysAuthorityService.listAll());
+    }
+
+    @GetMapping("getById/{id}")
+    public Result<SysAuthority> getSysAuthorityById(@PathVariable("id") String id) {
+        return Result.ok(iSysAuthorityService.getSysAuthorityById(id));
+    }
+
+    @DeleteMapping("deleteById/{id}")
+    public Result<Boolean> deleteSysAuthorityById(@PathVariable("id") String id) {
+        return Result.ok(iSysAuthorityService.deleteSysAuthorityById(id));
+    }
+
+    @PostMapping("add")
+    public Result<Boolean> addSysAuthority(@RequestBody SysAuthority obj) {
+        return Result.ok(iSysAuthorityService.addSysAuthority(obj));
+    }
+
+
+    @PutMapping("updateById")
+    public Result<Boolean> updateSysAuthorityById(@RequestBody SysAuthority obj) {
+        return Result.ok(iSysAuthorityService.updateSysAuthorityById(obj));
+    }
+
+}

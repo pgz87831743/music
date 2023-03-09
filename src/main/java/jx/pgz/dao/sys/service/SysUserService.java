@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jx.pgz.dao.sys.entity.SysUser;
 import jx.pgz.model.dto.PageDTO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,11 +22,13 @@ public interface SysUserService extends IService<SysUser> {
 
     List<SysUser> listAll();
 
-    SysUser getSysUserById(Long id);
+    SysUser getSysUserById(String id);
 
-    boolean deleteSysUserById(Long id);
+    boolean deleteSysUserById(String id);
 
     boolean addSysUser(SysUser obj);
 
     boolean updateSysUserById(SysUser obj);
+
+
 }

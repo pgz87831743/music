@@ -16,8 +16,8 @@ import jx.pgz.model.dto.PageDTO;
 public interface SysRoleService extends IService<SysRole> {
         Page<SysRole> page(PageDTO pageDTO);
         List<SysRole> listAll();
-        SysRole getSysRoleById(Long id);
-        boolean deleteSysRoleById(Long id);
+        SysRole getSysRoleById(String id);
+        boolean deleteSysRoleById(String id);
         boolean addSysRole(SysRole obj);
         boolean updateSysRoleById(SysRole obj);
 }

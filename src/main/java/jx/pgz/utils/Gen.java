@@ -33,7 +33,8 @@ public class Gen {
                             .build();
                 })
                 .strategyConfig(e -> {
-                    e.addInclude("sys_authority", "sys_role").build()
+                    e.addInclude("sys_user_role" ,
+                                    "sys_role_authority").build()
                             .serviceBuilder()
                             .formatServiceFileName("%sService")
                             .entityBuilder()

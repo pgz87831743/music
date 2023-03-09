@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 @Configuration
 @MapperScan({"jx.pgz.dao.*.mapper"})
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
 public class MyBatisPlusConfiguration implements MetaObjectHandler {
 
 

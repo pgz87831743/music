@@ -21,7 +21,7 @@ import java.util.List;
 public class FilesServiceFaceController {
 
     @Resource
-    FilesServiceFace filesServiceFace;
+    private FilesServiceFace filesServiceFace;
 
     @PostMapping("upload")
     @ApiOperation(value = "文件上传")

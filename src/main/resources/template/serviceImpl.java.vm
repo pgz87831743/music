@@ -32,11 +32,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
             return list();
         }
         @Override
-        public ${entity} get${entity}ById(Long id) {
+        public ${entity} get${entity}ById(String id) {
             return getById(id);
         }
         @Override
-        public boolean delete${entity}ById(Long id) {
+        public boolean delete${entity}ById(String id) {
             return removeById(id);
         }
         @Override

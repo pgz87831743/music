@@ -57,12 +57,12 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
         }
 
         @GetMapping("getById/{id}")
-        public Result<${entity}> get${entity}ById(@PathVariable("id") Long id) {
+        public Result<${entity}> get${entity}ById(@PathVariable("id") String id) {
             return Result.ok(i${entity}Service.get${entity}ById(id));
         }
 
         @DeleteMapping("deleteById/{id}")
-        public Result<Boolean> delete${entity}ById(@PathVariable("id") Long id) {
+        public Result<Boolean> delete${entity}ById(@PathVariable("id") String id) {
             return Result.ok(i${entity}Service.delete${entity}ById(id));
         }
 
