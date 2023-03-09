@@ -4,6 +4,7 @@ package jx.pgz.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
 import jx.pgz.entity.Car;
+import jx.pgz.entity.Report;
 import jx.pgz.model.dto.PageDTO;
 import jx.pgz.service.CarService;
 import jx.pgz.utils.Result;
@@ -36,6 +37,12 @@ public class CarController {
     @GetMapping("getById/{id}")
     public Result<Car> getCarById(@PathVariable("id") Long id) {
         return Result.ok(iCarService.getCarById(id));
+    }
+
+    @PostMapping("add")
+    @ApiOperation("新增汽车")
+    public Result<Boolean> addReport(@RequestBody Car car) {
+        return Result.ok(iCarService.save(car));
     }
 
 

@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class PageDTO {
 
     @ApiModelProperty(value = "当前页", example = "1")
@@ -45,7 +43,35 @@ public class PageDTO {
     }
 
 
+    public Integer getPageNum() {
+        return pageNum;
+    }
 
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
 
+    public Integer getPageSize() {
+        return pageSize;
+    }
 
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
 }
