@@ -29,14 +29,14 @@ public class GlobeException {
     @ExceptionHandler(RuntimeException.class)
     public Result<Object> bindException(RuntimeException exception) {
         exception.printStackTrace();
-        return Result.fail().setMsg(exception.getMessage());
+        return Result.fail().setMsg(exception.getMessage()).setShowMsg(true);
     }
 
 
     @ExceptionHandler(MyRuntimeException.class)
     public Result<Object> bindException(MyRuntimeException exception) {
         exception.printStackTrace();
-        return Result.fail().setMsg(exception.getMessage());
+        return Result.fail().setMsg(exception.getMsg()).setShowMsg(true);
     }
 
 

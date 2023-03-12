@@ -56,7 +56,7 @@ public class SysUserController {
 
     @PutMapping("updateById")
     public Result<Boolean> updateSysUserById(@RequestBody SysUser obj) {
-        return Result.ok(sysUserService.updateSysUserById(obj));
+        return Result.ok(sysUserService.updateSysUserById(obj)).setMsg("修改成功").setShowMsg(true);
     }
 
 
