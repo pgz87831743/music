@@ -22,10 +22,12 @@ public class ShiroConfig {
     public DefaultWebSecurityManager defaultWebSecurityManager(MyRealm myRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(myRealm);
-//        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
-//        matcher.setHashAlgorithmName("md5");
-//        matcher.setHashIterations(88);
-//        myRealm.setCredentialsMatcher(matcher);
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+        matcher.setHashAlgorithmName("md5");
+        matcher.setHashIterations(88);
+        myRealm.setCredentialsMatcher(matcher);
+
+
         return manager;
     }
 
