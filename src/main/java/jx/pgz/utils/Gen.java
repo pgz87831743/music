@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class Gen {
 
-    private static final String url = "jdbc:mysql://localhost:3306/basic";
+    private static final String url = "jdbc:mysql://localhost:3306/xiaoedaikuan";
     private static final String username = "root";
     private static final String password = "123456";
 
@@ -28,13 +28,13 @@ public class Gen {
                             .build();
                 })
                 .packageConfig((pck) -> {
-                    pck.moduleName("sys").parent("jx.pgz.dao")
+                    pck.parent("jx.pgz.dao")
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "C:\\Users\\pengmaofang\\Desktop\\music\\src\\main\\resources\\mapper"))
                             .build();
                 })
                 .strategyConfig(e -> {
-                    e.addInclude("sys_user_role" ,
-                                    "sys_role_authority").build()
+                    e.addInclude("qna"
+                                    ).build()
                             .serviceBuilder()
                             .formatServiceFileName("%sService")
                             .entityBuilder()

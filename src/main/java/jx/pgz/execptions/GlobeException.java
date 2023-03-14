@@ -5,6 +5,7 @@ import jx.pgz.utils.Result;
 
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -44,6 +45,12 @@ public class GlobeException {
     public Result<Object> bindException(UnauthorizedException exception) {
         exception.printStackTrace();
         return Result.fail(null).setMsg("暂无权限").setCode(ResultCodeEnum.TOKEN_ERROR.getCode());
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public Result<Object> bindException(HttpRequestMethodNotSupportedException exception) {
+        exception.printStackTrace();
+        return Result.fail(null).setMsg("登录过期").setCode(ResultCodeEnum.TOKEN_ERROR.getCode());
     }
 
 

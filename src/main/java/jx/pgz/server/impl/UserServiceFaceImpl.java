@@ -2,12 +2,12 @@ package jx.pgz.server.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import jx.pgz.dao.sys.entity.*;
-import jx.pgz.dao.sys.mapper.SysUserMapper;
-import jx.pgz.dao.sys.service.SysAuthorityService;
-import jx.pgz.dao.sys.service.SysRoleAuthorityService;
-import jx.pgz.dao.sys.service.SysRoleService;
-import jx.pgz.dao.sys.service.SysUserRoleService;
+import jx.pgz.dao.entity.*;
+import jx.pgz.dao.mapper.SysUserMapper;
+import jx.pgz.dao.service.SysAuthorityService;
+import jx.pgz.dao.service.SysRoleAuthorityService;
+import jx.pgz.dao.service.SysRoleService;
+import jx.pgz.dao.service.SysUserRoleService;
 import jx.pgz.model.dto.AssignAuthorityDTO;
 import jx.pgz.model.dto.AssignRolesDTO;
 import jx.pgz.server.UserServiceFace;

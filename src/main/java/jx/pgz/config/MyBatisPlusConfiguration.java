@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 
 
 @Configuration
-@MapperScan({"jx.pgz.dao.*.mapper"})
-@EnableTransactionManagement(proxyTargetClass = true)
+@MapperScan({"jx.pgz.dao.mapper"})
 public class MyBatisPlusConfiguration implements MetaObjectHandler {
 
 
@@ -32,7 +31,8 @@ public class MyBatisPlusConfiguration implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
-        this.strictInsertFill(metaObject, "createBy", String.class, SecurityUtils.getSubject().getPrincipal().toString());
+
+        this.strictInsertFill(metaObject, "createBy", String.class, SecurityUtils.getSubject().getPrincipal()==null?"guess": SecurityUtils.getSubject().getPrincipal().toString());
     }
 
     @Override

@@ -1,13 +1,10 @@
 package jx.pgz.server;
 
-import jx.pgz.dao.sys.entity.SysAuthority;
-import jx.pgz.dao.sys.entity.SysFile;
-import jx.pgz.dao.sys.entity.SysRole;
-import jx.pgz.dao.sys.entity.SysUser;
-import jx.pgz.enums.FileTypeEnum;
+import jx.pgz.dao.entity.SysAuthority;
+import jx.pgz.dao.entity.SysRole;
+import jx.pgz.dao.entity.SysUser;
 import jx.pgz.model.dto.AssignAuthorityDTO;
 import jx.pgz.model.dto.AssignRolesDTO;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

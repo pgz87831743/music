@@ -1,6 +1,6 @@
 package jx.pgz.server;
 
-import jx.pgz.dao.sys.entity.SysFile;
+import jx.pgz.dao.entity.SysFile;
 import jx.pgz.enums.FileTypeEnum;
 import org.springframework.web.multipart.MultipartFile;
 

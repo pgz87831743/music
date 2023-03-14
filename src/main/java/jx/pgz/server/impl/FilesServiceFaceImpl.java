@@ -1,8 +1,8 @@
 package jx.pgz.server.impl;
 
 
-import jx.pgz.dao.sys.entity.SysFile;
-import jx.pgz.dao.sys.service.SysFileService;
+import jx.pgz.dao.entity.SysFile;
+import jx.pgz.dao.service.SysFileService;
 import jx.pgz.enums.FileTypeEnum;
 import jx.pgz.server.FilesServiceFace;
 import org.springframework.beans.factory.InitializingBean;

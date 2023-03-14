@@ -49,6 +49,7 @@ public class ShiroConfig {
         filterMap.put("/favicon.ico", "anon");
         filterMap.put("/index.html", "anon");
         filterMap.put("/anon/**", "anon");
+        filterMap.put("/sys/sysUser/userRegister", "anon");
 
         //要认证的
         filterMap.put("/**", "authc");

@@ -1,8 +1,8 @@
 package jx.pgz.security;
 
-import jx.pgz.dao.sys.entity.SysAuthority;
-import jx.pgz.dao.sys.entity.SysRole;
-import jx.pgz.dao.sys.entity.SysUser;
+import jx.pgz.dao.entity.SysAuthority;
+import jx.pgz.dao.entity.SysRole;
+import jx.pgz.dao.entity.SysUser;
 import jx.pgz.server.UserServiceFace;
 import lombok.RequiredArgsConstructor;
 import org.apache.shiro.authc.AuthenticationException;
